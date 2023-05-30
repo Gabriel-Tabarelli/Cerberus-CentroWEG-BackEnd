@@ -1,38 +1,33 @@
-package net.weg.cerberuscentrowegbackend.model.entity;
+package net.weg.cerberuscentrowegbackend.model.dto;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.weg.cerberuscentrowegbackend.model.entity.Endereco;
 
-@Entity
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-public class Usuario {
+public class UsuarioDto {
 
-    @Id
-    @Column(length = 11)
-    @Pattern(regexp = "^(\\d{3}\\x2E\\d{3}\\x2E\\d{3}\\x2D\\d{2})|(\\d{11})$")
+    @NotNull
     private String cpf;
 
-    @Column(nullable = false)
+    @NotNull
     private String nome;
 
-    @Column(nullable = false)
-    @Pattern(regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")
+    @NotNull
+    @Email
     private String email;
 
-    @Column(nullable = false)
+    @NotNull
     private String senha;
 
-    @OneToOne
     private Endereco endereco;
 
-    @Column(nullable = false)
-    @Size(max = 15)
+    @NotNull
     private String telefone;
 
 }

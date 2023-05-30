@@ -1,26 +1,20 @@
-package net.weg.cerberuscentrowegbackend.model.entity;
+package net.weg.cerberuscentrowegbackend.model.dto;
 
-import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import net.weg.cerberuscentrowegbackend.model.entity.Produto;
+import net.weg.cerberuscentrowegbackend.model.entity.Usuario;
 
 import java.util.List;
 
-@Entity
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
-public class Carrinho {
+@AllArgsConstructor
+public class CarrinhoDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private List<Produto> produtos;
 
-    @OneToMany
-    private List<Produto> produto;
-
-    @ManyToOne
+    @NotNull
     private Usuario usuario;
 
 }

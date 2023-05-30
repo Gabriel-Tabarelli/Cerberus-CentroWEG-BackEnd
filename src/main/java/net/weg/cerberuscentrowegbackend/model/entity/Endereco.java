@@ -1,6 +1,7 @@
 package net.weg.cerberuscentrowegbackend.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,10 +31,11 @@ public class Endereco {
     @Column(nullable = false)
     private Integer numero;
 
-    @Column(length = 8)
-    private Character cep;
+    @Column(length = 9)
+    @Pattern(regexp = "^\\d{8}$")
+    private String cep;
 
-    @Column
+    @Column     
     private String complemento;
 
 }

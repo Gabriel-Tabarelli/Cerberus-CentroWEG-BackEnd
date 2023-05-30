@@ -1,26 +1,42 @@
-package net.weg.cerberuscentrowegbackend.model.entity;
+package net.weg.cerberuscentrowegbackend.service;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import net.weg.cerberuscentrowegbackend.model.entity.Carrinho;
+import net.weg.cerberuscentrowegbackend.repository.CarrinhoRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
-@Entity
+@Service
 @AllArgsConstructor
-@NoArgsConstructor
-@Data
-public class Carrinho {
+public class CarrinhoService {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private CarrinhoRepository carrinhoRepository;
 
-    @OneToMany
-    private List<Produto> produto;
+    public Carrinho create(Carrinho carrinho) {
+        return carrinhoRepository.save(carrinho);
+    }
 
-    @ManyToOne
-    private Usuario usuario;
+    public Carrinho update(Carrinho carrinho) {
+        return carrinhoRepository.save(carrinho);
+    }
+
+    public Carrinho findOne(Long id) {
+        Optional<Carrinho> carrinhoOptional = carrinhoRepository.findById(id);
+        if (carrinhoOptional.isPresent()) {
+            return carrinhoOptional.get();
+        }
+        throw new RuntimeException("Carrinho não encontrado!");
+    }
+
+    public List<Carrinho> findAll() {
+        return carrinhoRepository.findAll();
+    }
+
+    public Boolean delete(Long id) {
+        carrinhoRepository.deleteById(id);
+        return !carrinhoRepository.existsById(id);
+    }
 
 }

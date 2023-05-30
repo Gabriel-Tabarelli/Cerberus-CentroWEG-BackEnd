@@ -1,39 +1,33 @@
-package net.weg.cerberuscentrowegbackend.model.entity;
+package net.weg.cerberuscentrowegbackend.model.dto;
 
-import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-public class Endereco {
+public class EnderecoDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(nullable = false, length = 20)
+    @NotNull
     private String estado;
 
-    @Column(nullable = false)
+    @NotNull
     private String cidade;
 
-    @Column(nullable = false)
+    @NotNull
     private String bairro;
 
-    @Column(nullable = false)
+    @NotNull
     private String rua;
 
-    @Column(nullable = false)
+    @NotNull
     private Integer numero;
 
-    @Column(length = 8)
-    private Character cep;
+    @NotNull
+    private String cep;
 
-    @Column
     private String complemento;
 
 }

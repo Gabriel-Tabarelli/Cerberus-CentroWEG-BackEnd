@@ -30,6 +30,6 @@ public class Produto {
     private Categoria categoria;
 
     @OneToMany
-    private List<EspecificacoesProduto> especificacoes;
+    private List<EspecificacaoProduto> especificacoes;
 
 }

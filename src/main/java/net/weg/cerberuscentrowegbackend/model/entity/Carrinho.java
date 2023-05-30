@@ -18,7 +18,7 @@ public class Carrinho {
     private Long id;
 
     @OneToMany
-    private List<Produto> produto;
+    private List<Produto> produtos;
 
     @ManyToOne
     private Usuario usuario;

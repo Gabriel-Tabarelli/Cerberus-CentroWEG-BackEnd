@@ -1,38 +1,42 @@
-package net.weg.cerberuscentrowegbackend.model.entity;
+package net.weg.cerberuscentrowegbackend.service;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import net.weg.cerberuscentrowegbackend.model.entity.Usuario;
+import net.weg.cerberuscentrowegbackend.repository.UsuarioRepository;
+import org.springframework.stereotype.Service;
 
-@Entity
+import java.util.List;
+import java.util.Optional;
+
+@Service
 @AllArgsConstructor
-@NoArgsConstructor
-@Data
-public class Usuario {
+public class UsuarioService {
 
-    @Id
-    @Column(length = 11)
-    @Pattern(regexp = "^(\\d{3}\\x2E\\d{3}\\x2E\\d{3}\\x2D\\d{2})|(\\d{11})$")
-    private String cpf;
+    private UsuarioRepository usuarioRepository;
 
-    @Column(nullable = false)
-    private String nome;
+    public Usuario create(Usuario usuario) {
+        return usuarioRepository.save(usuario);
+    }
 
-    @Column(nullable = false)
-    @Pattern(regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")
-    private String email;
+    public Usuario update(Usuario usuario) {
+        return usuarioRepository.save(usuario);
+    }
 
-    @Column(nullable = false)
-    private String senha;
+    public Usuario findOne(String cpf) {
+        Optional<Usuario> usuarioOptional = usuarioRepository.findById(cpf);
+        if (usuarioOptional.isPresent()) {
+            return usuarioOptional.get();
+        }
+        throw new RuntimeException("Usuario não encontrado!");
+    }
 
-    @OneToOne
-    private Endereco endereco;
+    public List<Usuario> findAll() {
+        return usuarioRepository.findAll();
+    }
 
-    @Column(nullable = false)
-    @Size(max = 15)
-    private String telefone;
+    public Boolean delete(String cpf) {
+        usuarioRepository.deleteById(cpf);
+        return !usuarioRepository.existsById(cpf);
+    }
 
 }

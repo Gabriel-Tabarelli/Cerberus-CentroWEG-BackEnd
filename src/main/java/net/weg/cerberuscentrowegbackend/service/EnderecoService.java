@@ -1,39 +1,42 @@
-package net.weg.cerberuscentrowegbackend.model.entity;
+package net.weg.cerberuscentrowegbackend.service;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import net.weg.cerberuscentrowegbackend.model.entity.Endereco;
+import net.weg.cerberuscentrowegbackend.repository.EnderecoRepository;
+import org.springframework.stereotype.Service;
 
-@Entity
+import java.util.List;
+import java.util.Optional;
+
+@Service
 @AllArgsConstructor
-@NoArgsConstructor
-@Data
-public class Endereco {
+public class EnderecoService {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private EnderecoRepository enderecoRepository;
 
-    @Column(nullable = false, length = 20)
-    private String estado;
+    public Endereco create(Endereco endereco) {
+        return enderecoRepository.save(endereco);
+    }
 
-    @Column(nullable = false)
-    private String cidade;
+    public Endereco update(Endereco endereco) {
+        return enderecoRepository.save(endereco);
+    }
 
-    @Column(nullable = false)
-    private String bairro;
+    public Endereco findOne(Long id) {
+        Optional<Endereco> enderecoOptional = enderecoRepository.findById(id);
+        if (enderecoOptional.isPresent()) {
+            return enderecoOptional.get();
+        }
+        throw new RuntimeException("Endereco não encontrado!");
+    }
 
-    @Column(nullable = false)
-    private String rua;
+    public List<Endereco> findAll() {
+        return enderecoRepository.findAll();
+    }
 
-    @Column(nullable = false)
-    private Integer numero;
-
-    @Column(length = 8)
-    private Character cep;
-
-    @Column
-    private String complemento;
-
+    public Boolean delete(Long id) {
+        enderecoRepository.deleteById(id);
+        return !enderecoRepository.existsById(id);
+    }
+    
 }

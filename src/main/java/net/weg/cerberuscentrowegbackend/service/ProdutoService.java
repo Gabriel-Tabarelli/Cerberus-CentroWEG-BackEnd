@@ -1,35 +1,51 @@
-package net.weg.cerberuscentrowegbackend.model.entity;
+package net.weg.cerberuscentrowegbackend.service;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import net.weg.cerberuscentrowegbackend.model.entity.EspecificacaoProduto;
+import net.weg.cerberuscentrowegbackend.model.entity.Produto;
+import net.weg.cerberuscentrowegbackend.repository.ProdutoRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
-@Entity
+@Service
 @AllArgsConstructor
-@NoArgsConstructor
-@Data
-public class Produto {
+public class ProdutoService {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private ProdutoRepository produtoRepository;
+    private EspecificacaoProdutoService especificacaoProdutoService;
 
-    @Column(nullable = false)
-    private String nome;
+    public Produto create(Produto produto) {
+        return produtoRepository.save(produto);
+    }
 
-    @Column(nullable = false)
-    private String urlImagem;
+    public Produto update(Produto produto) {
+        return produtoRepository.save(produto);
+    }
 
-    @Column(length = 500)
-    private String descricao;
+    public Produto findOne(Long id) {
+        Optional<Produto> produtoOptional = produtoRepository.findById(id);
+        if (produtoOptional.isPresent()) {
+            return produtoOptional.get();
+        }
+        throw new RuntimeException("Produto não encontrado!");
+    }
 
-    @ManyToOne
-    private Categoria categoria;
+    public List<Produto> findAll() {
+        return produtoRepository.findAll();
+    }
 
-    @OneToMany
-    private List<EspecificacoesProduto> especificacoes;
+    public Boolean delete(Long id) {
+        produtoRepository.deleteById(id);
+        return !produtoRepository.existsById(id);
+    }
+
+    public Boolean addEspecificacao(Long idProduto, Long idEspecificacao) {
+        EspecificacaoProduto especificacao = especificacaoProdutoService.findOne(idEspecificacao);
+        Produto produto = findOne(idProduto);
+        produto.getEspecificacoes().add(especificacao);
+        return produto.getEspecificacoes().contains(especificacao);
+    }
 
 }

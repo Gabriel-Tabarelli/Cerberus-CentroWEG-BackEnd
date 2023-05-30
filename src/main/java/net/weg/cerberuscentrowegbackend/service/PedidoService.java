@@ -1,21 +1,42 @@
-package net.weg.cerberuscentrowegbackend.model.entity;
+package net.weg.cerberuscentrowegbackend.service;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import net.weg.cerberuscentrowegbackend.model.entity.Pedido;
+import net.weg.cerberuscentrowegbackend.repository.PedidoRepository;
+import org.springframework.stereotype.Service;
 
-@Entity
+import java.util.List;
+import java.util.Optional;
+
+@Service
 @AllArgsConstructor
-@NoArgsConstructor
-@Data
-public class Pedido {
+public class PedidoService {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private PedidoRepository pedidoRepository;
 
-    @OneToOne
-    private Carrinho carrinho;
+    public Pedido create(Pedido pedido) {
+        return pedidoRepository.save(pedido);
+    }
+
+    public Pedido update(Pedido pedido) {
+        return pedidoRepository.save(pedido);
+    }
+
+    public Pedido findOne(Long id) {
+        Optional<Pedido> pedidoOptional = pedidoRepository.findById(id);
+        if (pedidoOptional.isPresent()) {
+            return pedidoOptional.get();
+        }
+        throw new RuntimeException("Pedido não encontrado!");
+    }
+
+    public List<Pedido> findAll() {
+        return pedidoRepository.findAll();
+    }
+
+    public Boolean delete(Long id) {
+        pedidoRepository.deleteById(id);
+        return !pedidoRepository.existsById(id);
+    }
 
 }
