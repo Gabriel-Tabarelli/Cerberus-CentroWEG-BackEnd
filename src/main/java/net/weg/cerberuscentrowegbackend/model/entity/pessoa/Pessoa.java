@@ -1,22 +1,16 @@
-package net.weg.cerberuscentrowegbackend.model.entity;
+package net.weg.cerberuscentrowegbackend.model.entity.pessoa;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import net.weg.cerberuscentrowegbackend.model.entity.Endereco;
 
-@Entity
-@AllArgsConstructor
-@NoArgsConstructor
+@MappedSuperclass
 @Data
-public class Usuario {
-
-    @Id
-    @Column(length = 11)
-    @Pattern(regexp = "^(\\d{3}\\x2E\\d{3}\\x2E\\d{3}\\x2D\\d{2})|(\\d{11})$")
-    private String cpf;
+public abstract class Pessoa {
 
     @Column(nullable = false)
     private String nome;

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.weg.cerberuscentrowegbackend.model.entity.pessoa.PessoaFisica;
 
 import java.util.List;
 
@@ -21,6 +22,6 @@ public class Carrinho {
     private List<Produto> produtos;
 
     @ManyToOne
-    private Usuario usuario;
+    private PessoaFisica pessoaFisica;
 
 }

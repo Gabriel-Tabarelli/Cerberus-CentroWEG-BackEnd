@@ -1,4 +1,4 @@
-package net.weg.cerberuscentrowegbackend.model.dto;
+package net.weg.cerberuscentrowegbackend.model.dto.pessoa;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -10,7 +10,7 @@ import net.weg.cerberuscentrowegbackend.model.entity.Endereco;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UsuarioDto {
+public class PessoaFisicaDto {
 
     @NotNull
     private String cpf;
