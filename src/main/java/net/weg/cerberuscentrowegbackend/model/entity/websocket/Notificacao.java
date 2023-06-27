@@ -16,9 +16,9 @@ public class Notificacao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    @Column(nullable = false)
-    private Produto produto;
+//    @OneToOne
+//    @Column(nullable = false)
+//    private Produto produto;
 
     @Column(nullable = false)
     private String notificacao;

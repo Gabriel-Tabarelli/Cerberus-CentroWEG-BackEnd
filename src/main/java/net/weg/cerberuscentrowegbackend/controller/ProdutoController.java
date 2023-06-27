@@ -23,7 +23,7 @@ public class ProdutoController {
     public ResponseEntity<Produto> create(@RequestBody @Valid ProdutoDto produtoDto) {
         Produto produto = new Produto();
         BeanUtils.copyProperties(produtoDto, produto);
-        return ResponseEntity.ok(produtoService.create(produto));
+        return ResponseEntity.ok(produtoService.save(produto));
     }
 
     @PutMapping
@@ -50,4 +50,5 @@ public class ProdutoController {
     public ResponseEntity<Boolean> addEspecificacao(@PathVariable Long idProduto, @PathVariable Long idEspecificacao) {
         return ResponseEntity.ok(produtoService.addEspecificacao(idProduto, idEspecificacao));
     }
+
 }

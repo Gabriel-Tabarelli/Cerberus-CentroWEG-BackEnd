@@ -24,7 +24,7 @@ public class EnderecoController {
     public ResponseEntity<Endereco> create(@RequestBody @Valid EnderecoDto enderecoDto) {
         Endereco endereco = new Endereco();
         BeanUtils.copyProperties(enderecoDto, endereco);
-        return ResponseEntity.ok(enderecoService.create(endereco));
+        return ResponseEntity.ok(enderecoService.save(endereco));
     }
 
     @PutMapping

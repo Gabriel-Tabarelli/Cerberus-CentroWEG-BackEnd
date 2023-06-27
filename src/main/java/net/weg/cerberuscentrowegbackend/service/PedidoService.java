@@ -1,12 +1,12 @@
 package net.weg.cerberuscentrowegbackend.service;
 
 import lombok.AllArgsConstructor;
+import net.weg.cerberuscentrowegbackend.exception.ObjetoNaoEncontradoException;
 import net.weg.cerberuscentrowegbackend.model.entity.Pedido;
 import net.weg.cerberuscentrowegbackend.repository.PedidoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -14,7 +14,7 @@ public class PedidoService {
 
     private PedidoRepository pedidoRepository;
 
-    public Pedido create(Pedido pedido) {
+    public Pedido save(Pedido pedido) {
         return pedidoRepository.save(pedido);
     }
 
@@ -23,11 +23,8 @@ public class PedidoService {
     }
 
     public Pedido findOne(Long id) {
-        Optional<Pedido> pedidoOptional = pedidoRepository.findById(id);
-        if (pedidoOptional.isPresent()) {
-            return pedidoOptional.get();
-        }
-        throw new RuntimeException("Pedido não encontrado!");
+        return pedidoRepository.findById(id).orElseThrow(
+                ObjetoNaoEncontradoException::new);
     }
 
     public List<Pedido> findAll() {

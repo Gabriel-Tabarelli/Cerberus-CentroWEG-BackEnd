@@ -26,7 +26,7 @@ public class CarrinhoController {
     public ResponseEntity<Carrinho> create(@RequestBody @Valid CarrinhoDto carrinhoDto) {
         Carrinho carrinho = new Carrinho();
         BeanUtils.copyProperties(carrinhoDto, carrinho);
-        return ResponseEntity.ok(carrinhoService.create(carrinho));
+        return ResponseEntity.ok(carrinhoService.save(carrinho));
     }
 
     @PutMapping

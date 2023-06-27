@@ -1,12 +1,12 @@
 package net.weg.cerberuscentrowegbackend.service;
 
 import lombok.AllArgsConstructor;
+import net.weg.cerberuscentrowegbackend.exception.ObjetoNaoEncontradoException;
 import net.weg.cerberuscentrowegbackend.model.entity.EspecificacaoProduto;
 import net.weg.cerberuscentrowegbackend.repository.EspecificacaoProdutoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -14,7 +14,7 @@ public class EspecificacaoProdutoService {
 
     private EspecificacaoProdutoRepository especificacaoProdutoRepository;
 
-    public EspecificacaoProduto create(EspecificacaoProduto especificacaoProduto) {
+    public EspecificacaoProduto save(EspecificacaoProduto especificacaoProduto) {
         return especificacaoProdutoRepository.save(especificacaoProduto);
     }
 
@@ -23,11 +23,8 @@ public class EspecificacaoProdutoService {
     }
 
     public EspecificacaoProduto findOne(Long id) {
-        Optional<EspecificacaoProduto> especificacaoProdutoOptional = especificacaoProdutoRepository.findById(id);
-        if (especificacaoProdutoOptional.isPresent()) {
-            return especificacaoProdutoOptional.get();
-        }
-        throw new RuntimeException("EspecificacaoProduto não encontrado!");
+        return especificacaoProdutoRepository.findById(id).orElseThrow(
+                ObjetoNaoEncontradoException::new);
     }
 
     public List<EspecificacaoProduto> findAll() {

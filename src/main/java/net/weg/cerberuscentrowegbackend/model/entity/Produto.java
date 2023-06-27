@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.weg.cerberuscentrowegbackend.model.entity.websocket.Pergunta;
 
 import java.util.List;
 
@@ -31,5 +32,8 @@ public class Produto {
 
     @OneToMany
     private List<EspecificacaoProduto> especificacoes;
+
+    @OneToMany(mappedBy = "produto")
+    private List<Pergunta> perguntas;
 
 }

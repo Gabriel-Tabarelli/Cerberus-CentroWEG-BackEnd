@@ -23,7 +23,7 @@ public class CategoriaController {
     public ResponseEntity<Categoria> create(@RequestBody @Valid CategoriaDto categoriaDto) {
         Categoria categoria = new Categoria();
         BeanUtils.copyProperties(categoriaDto, categoria);
-        return ResponseEntity.ok(categoriaService.create(categoria));
+        return ResponseEntity.ok(categoriaService.save(categoria));
     }
 
     @PutMapping

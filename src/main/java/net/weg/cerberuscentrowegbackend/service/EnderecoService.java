@@ -1,12 +1,12 @@
 package net.weg.cerberuscentrowegbackend.service;
 
 import lombok.AllArgsConstructor;
+import net.weg.cerberuscentrowegbackend.exception.ObjetoNaoEncontradoException;
 import net.weg.cerberuscentrowegbackend.model.entity.Endereco;
 import net.weg.cerberuscentrowegbackend.repository.EnderecoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -14,7 +14,7 @@ public class EnderecoService {
 
     private EnderecoRepository enderecoRepository;
 
-    public Endereco create(Endereco endereco) {
+    public Endereco save(Endereco endereco) {
         return enderecoRepository.save(endereco);
     }
 
@@ -23,11 +23,8 @@ public class EnderecoService {
     }
 
     public Endereco findOne(Long id) {
-        Optional<Endereco> enderecoOptional = enderecoRepository.findById(id);
-        if (enderecoOptional.isPresent()) {
-            return enderecoOptional.get();
-        }
-        throw new RuntimeException("Endereco não encontrado!");
+        return enderecoRepository.findById(id).orElseThrow(
+                ObjetoNaoEncontradoException::new);
     }
 
     public List<Endereco> findAll() {

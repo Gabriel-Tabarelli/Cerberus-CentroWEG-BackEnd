@@ -23,8 +23,8 @@ public class Pergunta {
 //    @Column(nullable = false)
 //    private Pessoa pessoa;
 
-    @OneToOne
-    @Column(nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "produto_id")
     private Produto produto;
 
     @OneToMany

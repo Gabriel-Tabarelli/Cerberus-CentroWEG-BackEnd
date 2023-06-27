@@ -23,7 +23,7 @@ public class PedidoController {
     public ResponseEntity<Pedido> create(@RequestBody @Valid PedidoDto pedidoDto) {
         Pedido pedido = new Pedido();
         BeanUtils.copyProperties(pedidoDto, pedido);
-        return ResponseEntity.ok(pedidoService.create(pedido));
+        return ResponseEntity.ok(pedidoService.save(pedido));
     }
 
     @PutMapping

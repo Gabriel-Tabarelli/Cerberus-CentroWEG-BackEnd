@@ -1,12 +1,12 @@
 package net.weg.cerberuscentrowegbackend.service;
 
 import lombok.AllArgsConstructor;
+import net.weg.cerberuscentrowegbackend.exception.ObjetoNaoEncontradoException;
 import net.weg.cerberuscentrowegbackend.model.entity.Categoria;
 import net.weg.cerberuscentrowegbackend.repository.CategoriaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -14,7 +14,7 @@ public class CategoriaService {
 
     private CategoriaRepository categoriaRepository;
 
-    public Categoria create(Categoria categoria) {
+    public Categoria save(Categoria categoria) {
         return categoriaRepository.save(categoria);
     }
 
@@ -23,11 +23,8 @@ public class CategoriaService {
     }
 
     public Categoria findOne(Long id) {
-        Optional<Categoria> categoriaOptional = categoriaRepository.findById(id);
-        if (categoriaOptional.isPresent()) {
-            return categoriaOptional.get();
-        }
-        throw new RuntimeException("Categoria não encontrado!");
+        return categoriaRepository.findById(id).orElseThrow(
+                ObjetoNaoEncontradoException::new);
     }
 
     public List<Categoria> findAll() {

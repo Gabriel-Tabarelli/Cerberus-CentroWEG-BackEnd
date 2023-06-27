@@ -1,13 +1,13 @@
 package net.weg.cerberuscentrowegbackend.service;
 
 import lombok.AllArgsConstructor;
+import net.weg.cerberuscentrowegbackend.exception.ObjetoNaoEncontradoException;
 import net.weg.cerberuscentrowegbackend.model.entity.Carrinho;
 import net.weg.cerberuscentrowegbackend.model.entity.Produto;
 import net.weg.cerberuscentrowegbackend.repository.CarrinhoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -15,7 +15,7 @@ public class CarrinhoService {
 
     private CarrinhoRepository carrinhoRepository;
 
-    public Carrinho create(Carrinho carrinho) {
+    public Carrinho save(Carrinho carrinho) {
         return carrinhoRepository.save(carrinho);
     }
 
@@ -24,11 +24,8 @@ public class CarrinhoService {
     }
 
     public Carrinho findOne(Long id) {
-        Optional<Carrinho> carrinhoOptional = carrinhoRepository.findById(id);
-        if (carrinhoOptional.isPresent()) {
-            return carrinhoOptional.get();
-        }
-        throw new RuntimeException("Carrinho não encontrado!");
+        return carrinhoRepository.findById(id).orElseThrow(
+                ObjetoNaoEncontradoException::new);
     }
 
     public List<Carrinho> findAll() {

@@ -23,7 +23,7 @@ public class EspecificacaoProdutoController {
     public ResponseEntity<EspecificacaoProduto> create(@RequestBody @Valid EspecificacaoProdutoDto especificacaoProdutoDto) {
         EspecificacaoProduto especificacaoProduto = new EspecificacaoProduto();
         BeanUtils.copyProperties(especificacaoProdutoDto, especificacaoProduto);
-        return ResponseEntity.ok(especificacaoProdutoService.create(especificacaoProduto));
+        return ResponseEntity.ok(especificacaoProdutoService.save(especificacaoProduto));
     }
 
     @PutMapping
