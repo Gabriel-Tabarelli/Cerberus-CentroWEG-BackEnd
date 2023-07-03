@@ -32,4 +32,7 @@ public abstract class Pessoa {
     @Size(max = 15)
     private String telefone;
 
+    // Fazer uma tabela de conexões entre um produto e um usuário para buscar essa tabela ao
+    // logar e inscrever-se nos tópicos necessários para receber notificações,etc.
+
 }
