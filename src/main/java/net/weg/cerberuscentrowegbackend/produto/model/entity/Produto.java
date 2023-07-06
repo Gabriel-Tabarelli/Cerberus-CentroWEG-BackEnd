@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import net.weg.cerberuscentrowegbackend.categoria.model.entity.Categoria;
+import net.weg.cerberuscentrowegbackend.produto.model.projection.ProdutoMinimizadoProjection;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Produto {
+public class Produto implements ProdutoMinimizadoProjection {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

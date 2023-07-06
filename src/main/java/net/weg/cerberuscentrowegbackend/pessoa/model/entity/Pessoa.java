@@ -5,6 +5,9 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import net.weg.cerberuscentrowegbackend.endereco.model.entity.Endereco;
+import net.weg.cerberuscentrowegbackend.produto.model.entity.Produto;
+
+import java.util.List;
 
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Entity
@@ -32,7 +35,10 @@ public abstract class Pessoa {
     @Size(max = 15)
     private String telefone;
 
-    // Fazer uma tabela de conexões entre um produto e um usuário para buscar essa tabela ao
-    // logar e inscrever-se nos tópicos necessários para receber notificações,etc.
+    @ManyToMany
+    private List<Produto> favoritos;
+
+    /*Fazer uma tabela de conexões entre um produto e um usuário para buscar essa tabela ao
+    logar e inscrever-se nos tópicos necessários para receber notificações,etc.*/
 
 }

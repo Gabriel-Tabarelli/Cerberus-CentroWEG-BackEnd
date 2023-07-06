@@ -3,10 +3,15 @@ package net.weg.cerberuscentrowegbackend.produto.controller;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import net.weg.cerberuscentrowegbackend.produto.model.dto.ProdutoDto;
+import net.weg.cerberuscentrowegbackend.produto.model.entity.Pergunta;
 import net.weg.cerberuscentrowegbackend.produto.model.entity.Produto;
 import net.weg.cerberuscentrowegbackend.produto.model.projection.ProdutoMinimizadoProjection;
+import net.weg.cerberuscentrowegbackend.produto.model.projection.ProdutoPerguntasProjection;
+import net.weg.cerberuscentrowegbackend.produto.model.projection.ProdutoSemPerguntasProjection;
 import net.weg.cerberuscentrowegbackend.produto.service.ProdutoService;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -15,43 +20,45 @@ import java.util.List;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/produto")
+@RequestMapping("/api/produto")
 public class ProdutoController {
 
-    private ProdutoService produtoService;
+    private ProdutoService service;
 
     @PostMapping
     public ResponseEntity<Produto> create(@RequestBody @Valid ProdutoDto produtoDto) {
         Produto produto = new Produto();
         BeanUtils.copyProperties(produtoDto, produto);
-        return ResponseEntity.ok(produtoService.save(produto));
-    }
-
-    @PutMapping
-    public ResponseEntity<Produto> update(@RequestBody @Valid Produto produto) {
-        return ResponseEntity.ok(produtoService.update(produto));
+        return ResponseEntity.ok(service.save(produto));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable Long id) {
-        return ResponseEntity.ok(produtoService.delete(id));
+        return ResponseEntity.ok(service.delete(id));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Produto> findOne(@PathVariable Long id) {
-        return ResponseEntity.ok(produtoService.findOne(id));
+    @GetMapping("/{nomeProduto}")
+    public ResponseEntity<ProdutoSemPerguntasProjection> findOne(@PathVariable String nomeProduto) {
+        return ResponseEntity.ok(service.findOne(nomeProduto));
     }
 
-    @GetMapping()
-    public ResponseEntity<List<ProdutoMinimizadoProjection>> findAll() {
-        return ResponseEntity.ok(produtoService.findAllMinimizado());
+    @GetMapping("/get-minimizados")
+    public ResponseEntity<List<ProdutoMinimizadoProjection>> findAllMinimizado() {
+        return ResponseEntity.ok(service.findAllMinimizado());
     }
 
+    @GetMapping("/{nomeProduto}/perguntas")
+    public ResponseEntity<Page<ProdutoPerguntasProjection>> findPerguntas(
+            @PathVariable String nomeProduto,
+            @RequestParam("pageable") Pageable pageable
+    ) {
+        return ResponseEntity.ok(service.findPerguntas(nomeProduto, pageable));
+    }
 
-    @PutMapping("/{idProduto}/adicionar-especificacao/{idEspecificacao}")
-    public ResponseEntity<Boolean> addEspecificacao(@PathVariable Long idProduto,
+    @PutMapping("/{nomeProduto}/adicionar-especificacao/{idEspecificacao}")
+    public ResponseEntity<Boolean> addEspecificacao(@PathVariable String nomeProduto,
                                                     @PathVariable Long idEspecificacao) {
-        return ResponseEntity.ok(produtoService.addEspecificacao(idProduto, idEspecificacao));
+        return ResponseEntity.ok(service.addEspecificacao(nomeProduto, idEspecificacao));
     }
 
 }

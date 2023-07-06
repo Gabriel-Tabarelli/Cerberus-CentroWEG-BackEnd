@@ -35,10 +35,4 @@ public class PerguntaController {
         return perguntaService.save(pergunta);
     }
 
-    @GetMapping("/{nomeProduto}/perguntas")
-    public ResponseEntity<Page<Pergunta>> getAll(@RequestParam("pagina") int pagina,
-                                                 @PathVariable String nomeProduto) {
-        return ResponseEntity.ok(perguntaService.getAll(nomeProduto, pagina));
-    }
-
 }

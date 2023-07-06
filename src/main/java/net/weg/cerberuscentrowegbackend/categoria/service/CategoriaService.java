@@ -35,5 +35,4 @@ public class CategoriaService {
         categoriaRepository.deleteById(id);
         return !categoriaRepository.existsById(id);
     }
-
 }
