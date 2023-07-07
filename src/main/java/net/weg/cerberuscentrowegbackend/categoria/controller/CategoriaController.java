@@ -40,7 +40,7 @@ public class CategoriaController {
     public ResponseEntity<Categoria> findOne(@PathVariable Long id) {
         return ResponseEntity.ok(service.findOne(id));
     }
-
+    //commit
     @GetMapping()
     public ResponseEntity<List<Categoria>> findAll() {
         return ResponseEntity.ok(service.findAll());
