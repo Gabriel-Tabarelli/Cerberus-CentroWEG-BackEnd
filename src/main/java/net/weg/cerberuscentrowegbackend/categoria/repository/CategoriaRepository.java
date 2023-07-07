@@ -9,6 +9,6 @@ import java.util.List;
 @Repository
 public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
 
-    List<Categoria> findAllByCategoria_Nome(String categoria_nome);
+    List<Categoria> findAllByCategoria_Id(Long categoria_id);
 
 }

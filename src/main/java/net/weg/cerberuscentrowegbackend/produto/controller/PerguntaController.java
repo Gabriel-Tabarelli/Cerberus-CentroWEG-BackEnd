@@ -8,8 +8,6 @@ import net.weg.cerberuscentrowegbackend.produto.model.entity.Pergunta;
 import net.weg.cerberuscentrowegbackend.produto.service.ProdutoService;
 import net.weg.cerberuscentrowegbackend.produto.service.PerguntaService;
 import org.springframework.beans.BeanUtils;
-import org.springframework.data.domain.Page;
-import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/produto")
 public class PerguntaController {
 
     private PerguntaService perguntaService;
