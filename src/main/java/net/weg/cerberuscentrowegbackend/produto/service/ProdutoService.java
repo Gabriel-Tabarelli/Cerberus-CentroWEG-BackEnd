@@ -45,11 +45,10 @@ public class ProdutoService {
         return !repository.existsById(id);
     }
 
-    public Boolean addEspecificacao(String nome, Long idEspecificacao) {
+    public void addEspecificacao(String nome, Long idEspecificacao) {
         EspecificacaoProduto especificacao = especificacaoProdutoService.findOne(idEspecificacao);
         Produto produto = findByNome(nome);
         produto.getEspecificacoes().add(especificacao);
-        return produto.getEspecificacoes().contains(especificacao);
     }
 
     public Page<ProdutoPerguntasProjection> findPerguntas(String nomeProduto, Pageable pageable) {

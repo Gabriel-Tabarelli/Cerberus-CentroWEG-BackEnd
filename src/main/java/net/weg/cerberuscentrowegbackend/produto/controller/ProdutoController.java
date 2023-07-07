@@ -56,9 +56,10 @@ public class ProdutoController {
     }
 
     @PutMapping("/{nomeProduto}/adicionar-especificacao/{idEspecificacao}")
-    public ResponseEntity<Boolean> addEspecificacao(@PathVariable String nomeProduto,
+    public ResponseEntity<Void> addEspecificacao(@PathVariable String nomeProduto,
                                                     @PathVariable Long idEspecificacao) {
-        return ResponseEntity.ok(service.addEspecificacao(nomeProduto, idEspecificacao));
+        service.addEspecificacao(nomeProduto, idEspecificacao);
+        return ResponseEntity.ok().build();
     }
 
 }
