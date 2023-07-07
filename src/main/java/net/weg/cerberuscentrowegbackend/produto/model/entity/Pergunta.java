@@ -18,13 +18,13 @@ public class Pergunta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Pessoa pessoa;
 
     @ManyToOne
     private Produto produto;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "pergunta_id")
     private List<Resposta> listaRespostas;
 

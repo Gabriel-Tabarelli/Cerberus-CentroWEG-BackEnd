@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import net.weg.cerberuscentrowegbackend.categoria.model.entity.Categoria;
 import net.weg.cerberuscentrowegbackend.produto.model.entity.EspecificacaoProduto;
+import net.weg.cerberuscentrowegbackend.produto.model.entity.Pergunta;
 
 import java.util.List;
 
@@ -27,5 +28,7 @@ public class ProdutoDto {
     private Categoria categoria;
 
     private List<EspecificacaoProduto> especificacoes;
+
+    private List<Pergunta> perguntas;
 
 }

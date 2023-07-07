@@ -28,14 +28,14 @@ public class Produto implements ProdutoMinimizadoProjection {
     @Column(length = 500)
     private String descricao;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Categoria categoria;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "produto_id")
     private List<EspecificacaoProduto> especificacoes;
 
-    @OneToMany(mappedBy = "produto")
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
     private List<Pergunta> perguntas;
 
 }
