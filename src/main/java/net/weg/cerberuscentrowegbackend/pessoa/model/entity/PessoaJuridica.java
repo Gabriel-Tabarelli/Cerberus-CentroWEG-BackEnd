@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Entity
 public class PessoaJuridica extends Pessoa{
 
     @Column(length = 14, unique = true)

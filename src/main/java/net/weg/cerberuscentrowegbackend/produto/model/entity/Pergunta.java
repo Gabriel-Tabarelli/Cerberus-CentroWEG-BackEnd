@@ -1,5 +1,6 @@
 package net.weg.cerberuscentrowegbackend.produto.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,10 +19,12 @@ public class Pergunta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private Pessoa pessoa;
 
     @ManyToOne
+    @JoinColumn(name = "produto_id")
+    @JsonIgnore
     private Produto produto;
 
     @OneToMany(cascade = CascadeType.ALL)
