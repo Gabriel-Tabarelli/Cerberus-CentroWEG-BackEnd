@@ -38,10 +38,10 @@ public class ProdutoController {
         BeanUtils.copyProperties(produtoDto, produto);
         for (Pergunta pergunta : produtoDto.getPerguntas()) {
             for (Resposta resposta : pergunta.getListaRespostas()) {
-                Pessoa pessoa = pessoaService.getOne(resposta.getPessoa().getId());
+                Pessoa pessoa = pessoaService.findOne(resposta.getPessoa().getId());
                 resposta.setPessoa(pessoa);
             }
-            Pessoa pessoa = pessoaService.getOne(pergunta.getPessoa().getId());
+            Pessoa pessoa = pessoaService.findOne(pergunta.getPessoa().getId());
             pergunta.setPessoa(pessoa);
             pergunta.setProduto(produto);
         }
@@ -49,38 +49,36 @@ public class ProdutoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Boolean> delete(@PathVariable Long id) {
-        return ResponseEntity.ok(service.delete(id));
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
     }
 
-    @GetMapping("/{nomeProduto}")
-    public ResponseEntity<ProdutoSemPerguntasProjection> findOne(@PathVariable String nomeProduto) {
-        System.out.println("Find one");
 
-        return ResponseEntity.ok(service.findOne(nomeProduto));
+    @GetMapping("/{id}")
+    public ProdutoSemPerguntasProjection findOne(@PathVariable Long id) {
+        return service.findOneById(id);
     }
 
     @GetMapping("/get/minimizados")
     public ResponseEntity<List<ProdutoMinimizadoProjection>> findAllMinimizado() {
         System.out.println("Minimizadao");
         return ResponseEntity.ok(service.findAllMinimizado());
+
     }
 
-    @GetMapping("/{nomeProduto}/perguntas")
-    public ResponseEntity<Page<ProdutoPerguntasProjection>> findPerguntas(
-            @PathVariable String nomeProduto,
-            @RequestParam("page") int page,
-            @RequestParam("size") int size
+    @GetMapping("/{id}/perguntas")
+    public Page<ProdutoPerguntasProjection> findPerguntas(
+            @PathVariable Long id,
+            @RequestParam("page") int page
     ) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by("nome").descending());
-        return ResponseEntity.ok(service.findPerguntas(nomeProduto, pageable));
+        Pageable pageable = PageRequest.of(page, 3, Sort.by("nome").descending());
+        return service.findPerguntas(id, pageable);
     }
 
-    @PutMapping("/{nomeProduto}/adicionar-especificacao/{idEspecificacao}")
-    public ResponseEntity<Void> addEspecificacao(@PathVariable String nomeProduto,
+    @PutMapping("/{id}/adicionar-especificacao/{idEspecificacao}")
+    public void addEspecificacao(@PathVariable Long id,
                                                     @PathVariable Long idEspecificacao) {
-        service.addEspecificacao(nomeProduto, idEspecificacao);
-        return ResponseEntity.ok().build();
+        service.addEspecificacao(id, idEspecificacao);
     }
 
 }

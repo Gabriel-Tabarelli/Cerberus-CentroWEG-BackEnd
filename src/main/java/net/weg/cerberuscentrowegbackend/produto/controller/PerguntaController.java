@@ -27,7 +27,7 @@ public class PerguntaController {
                               @DestinationVariable String nomeProduto) {
         Pergunta pergunta = new Pergunta();
         BeanUtils.copyProperties(perguntaDto, pergunta);
-        Produto produto = produtoService.findByNome(nomeProduto);
+        Produto produto = produtoService.findById(nomeProduto);
         produto.getPerguntas().add(pergunta);
         return perguntaService.save(pergunta);
     }

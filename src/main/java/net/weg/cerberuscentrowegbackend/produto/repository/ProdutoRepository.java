@@ -15,12 +15,12 @@ import java.util.Optional;
 @Repository
 public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
-    Optional<Produto> findByNome(String nome);
-
-    Optional<ProdutoSemPerguntasProjection> findProdutoByNome(String nome);
+    Optional<ProdutoSemPerguntasProjection> findProdutoById(Long id);
 
     List<ProdutoMinimizadoProjection> findAllBy();
 
-    Page<ProdutoPerguntasProjection> findAllByNome(String nome, Pageable pageable);
+    List<ProdutoMinimizadoProjection> findAllByCategoria_Id(Long categoria_id);
+
+    Page<ProdutoPerguntasProjection> findAllById(Long id, Pageable pageable);
 
 }

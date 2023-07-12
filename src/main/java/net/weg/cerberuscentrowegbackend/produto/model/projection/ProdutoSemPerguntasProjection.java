@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface ProdutoSemPerguntasProjection {
 
+    Long getId();
+
     String getNome();
 
     String getUrlImagem();

@@ -14,36 +14,26 @@ import java.util.List;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/categoria")
+@RequestMapping("/api/categoria")
 public class CategoriaController {
     
     private CategoriaService service;
 
     @PostMapping
-    public ResponseEntity<Categoria> save(@RequestBody @Valid CategoriaDto categoriaDto) {
+    public void save(@RequestBody @Valid CategoriaDto categoriaDto) {
         Categoria categoria = new Categoria();
         BeanUtils.copyProperties(categoriaDto, categoria);
-        return ResponseEntity.ok(service.save(categoria));
-    }
-
-    @PutMapping
-    public ResponseEntity<Categoria> update(@RequestBody @Valid Categoria categoria) {
-        return ResponseEntity.ok(service.update(categoria));
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Boolean> delete(@PathVariable Long id) {
-        return ResponseEntity.ok(service.delete(id));
+        service.save(categoria);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Categoria> findOne(@PathVariable Long id) {
-        return ResponseEntity.ok(service.findOne(id));
+    public List<?> findCategorias(@PathVariable Long id) {
+        return service.findCategorias(id);
     }
-    //commit
+
     @GetMapping()
-    public ResponseEntity<List<Categoria>> findAll() {
-        return ResponseEntity.ok(service.findAll());
+    public List<Categoria> findAll() {
+        return service.findAll();
     }
 
 }
