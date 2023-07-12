@@ -26,6 +26,7 @@ import java.util.List;
 @Controller
 @AllArgsConstructor
 @RequestMapping("/api/produto")
+@CrossOrigin
 public class ProdutoController {
 
     private ProdutoService service;
@@ -52,14 +53,17 @@ public class ProdutoController {
         service.delete(id);
     }
 
+
     @GetMapping("/{id}")
     public ProdutoSemPerguntasProjection findOne(@PathVariable Long id) {
         return service.findOneById(id);
     }
 
-    @GetMapping("/get-minimizados")
-    public List<ProdutoMinimizadoProjection> findAllMinimizado() {
-        return service.findAllMinimizado();
+    @GetMapping("/get/minimizados")
+    public ResponseEntity<List<ProdutoMinimizadoProjection>> findAllMinimizado() {
+        System.out.println("Minimizadao");
+        return ResponseEntity.ok(service.findAllMinimizado());
+
     }
 
     @GetMapping("/{id}/perguntas")
