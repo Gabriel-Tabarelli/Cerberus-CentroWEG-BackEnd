@@ -26,6 +26,7 @@ import java.util.List;
 @Controller
 @AllArgsConstructor
 @RequestMapping("/api/produto")
+@CrossOrigin
 public class ProdutoController {
 
     private ProdutoService service;
@@ -54,11 +55,14 @@ public class ProdutoController {
 
     @GetMapping("/{nomeProduto}")
     public ResponseEntity<ProdutoSemPerguntasProjection> findOne(@PathVariable String nomeProduto) {
+        System.out.println("Find one");
+
         return ResponseEntity.ok(service.findOne(nomeProduto));
     }
 
-    @GetMapping("/get-minimizados")
+    @GetMapping("/get/minimizados")
     public ResponseEntity<List<ProdutoMinimizadoProjection>> findAllMinimizado() {
+        System.out.println("Minimizadao");
         return ResponseEntity.ok(service.findAllMinimizado());
     }
 
