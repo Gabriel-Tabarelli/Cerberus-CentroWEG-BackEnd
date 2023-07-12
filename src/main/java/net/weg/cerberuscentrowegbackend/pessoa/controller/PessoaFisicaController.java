@@ -14,7 +14,7 @@ import java.util.List;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/pessoa-fisica")
+@RequestMapping("/api/pessoa-fisica")
 public class PessoaFisicaController {
 
     private PessoaFisicaService pessoaFisicaService;

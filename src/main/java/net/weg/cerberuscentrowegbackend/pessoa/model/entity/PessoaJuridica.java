@@ -9,10 +9,10 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @EqualsAndHashCode(callSuper = true)
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Entity
 public class PessoaJuridica extends Pessoa{
 
     @Column(length = 14, unique = true)

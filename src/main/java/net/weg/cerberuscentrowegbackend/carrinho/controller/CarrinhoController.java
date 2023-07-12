@@ -12,11 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Controller
 @AllArgsConstructor
-@RequestMapping("/carrinho")
+@RequestMapping("/api/carrinho")
 public class CarrinhoController {
 
     private CarrinhoService carrinhoService;
@@ -46,17 +44,17 @@ public class CarrinhoController {
 
     @PutMapping("/{idCarrinho}/adicionar-produto/{idProduto}")
     public ResponseEntity<Carrinho> addProduto(@PathVariable Long idCarrinho,
-                                               @PathVariable Long idProduto) {
+                                               @PathVariable String idProduto) {
         Carrinho carrinho = carrinhoService.findOne(idCarrinho);
-        Produto produto = produtoService.findOne(idProduto);
+        Produto produto = produtoService.findByNome(idProduto);
         return ResponseEntity.ok(carrinhoService.addProduto(carrinho, produto));
     }
 
     @PutMapping("/{idCarrinho}/remover-produto/{idProduto}")
     public ResponseEntity<Carrinho> rmProduto(@PathVariable Long idCarrinho,
-                                              @PathVariable Long idProduto) {
+                                              @PathVariable String idProduto) {
         Carrinho carrinho = carrinhoService.findOne(idCarrinho);
-        Produto produto = produtoService.findOne(idProduto);
+        Produto produto = produtoService.findByNome(idProduto);
         return ResponseEntity.ok(carrinhoService.rmProduto(carrinho, produto));
     }
 

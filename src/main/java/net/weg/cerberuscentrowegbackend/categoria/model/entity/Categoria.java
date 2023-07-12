@@ -18,7 +18,7 @@ public class Categoria {
     @Column(nullable = false)
     private String nome;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Categoria categoria;
 
 }

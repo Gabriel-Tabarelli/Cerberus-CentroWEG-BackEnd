@@ -9,10 +9,10 @@ import net.weg.cerberuscentrowegbackend.produto.model.entity.Produto;
 
 import java.util.List;
 
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Data
-public abstract class Pessoa {
+public class Pessoa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,7 +28,7 @@ public abstract class Pessoa {
     @Column(nullable = false)
     private String senha;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Endereco endereco;
 
     @Column(nullable = false)

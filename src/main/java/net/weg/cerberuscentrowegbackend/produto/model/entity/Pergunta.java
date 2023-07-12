@@ -1,5 +1,6 @@
 package net.weg.cerberuscentrowegbackend.produto.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,9 +23,11 @@ public class Pergunta {
     private Pessoa pessoa;
 
     @ManyToOne
+    @JoinColumn(name = "produto_id")
+    @JsonIgnore
     private Produto produto;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "pergunta_id")
     private List<Resposta> listaRespostas;
 

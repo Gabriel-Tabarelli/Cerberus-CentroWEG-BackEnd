@@ -22,8 +22,8 @@ public class ProdutoService {
 
     private EspecificacaoProdutoService especificacaoProdutoService;
 
-    public Produto save(Produto produto) {
-        return repository.save(produto);
+    public void save(Produto produto) {
+        repository.save(produto);
     }
 
     public ProdutoSemPerguntasProjection findOne(String nome) {

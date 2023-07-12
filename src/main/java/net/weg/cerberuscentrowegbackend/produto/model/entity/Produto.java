@@ -1,5 +1,6 @@
 package net.weg.cerberuscentrowegbackend.produto.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Produto implements ProdutoMinimizadoProjection {
+public class Produto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,14 +29,15 @@ public class Produto implements ProdutoMinimizadoProjection {
     @Column(length = 500)
     private String descricao;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Categoria categoria;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "produto_id")
     private List<EspecificacaoProduto> especificacoes;
 
-    @OneToMany(mappedBy = "produto")
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.PERSIST)
+    @JsonIgnore
     private List<Pergunta> perguntas;
 
 }

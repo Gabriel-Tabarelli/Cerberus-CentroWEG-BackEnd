@@ -32,4 +32,11 @@ public class PerguntaController {
         return perguntaService.save(pergunta);
     }
 
+    @PostMapping("/api/pergunta")
+    public void perguntar(@RequestBody @Valid PerguntaDto perguntaDto) {
+        Pergunta pergunta = new Pergunta();
+        BeanUtils.copyProperties(perguntaDto, pergunta);
+        perguntaService.save(pergunta);
+    }
+
 }
