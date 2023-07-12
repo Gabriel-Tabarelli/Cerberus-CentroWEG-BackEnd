@@ -21,13 +21,13 @@ public class PerguntaController {
     private PerguntaService perguntaService;
     private ProdutoService produtoService;
 
-    @MessageMapping("/{nomeProduto}/perguntar") //Chegada da mensagem
-    @SendTo("/topic/{nomeProduto}") //Envio da mensagem
+    @MessageMapping("/{idProduto}/perguntar") //Chegada da mensagem
+    @SendTo("/topic/{idProduto}") //Envio da mensagem
     public Pergunta perguntar(@Valid @Payload PerguntaDto perguntaDto,
-                              @DestinationVariable String nomeProduto) {
+                              @DestinationVariable Long idProduto) {
         Pergunta pergunta = new Pergunta();
         BeanUtils.copyProperties(perguntaDto, pergunta);
-        Produto produto = produtoService.findById(nomeProduto);
+        Produto produto = produtoService.findById(idProduto);
         produto.getPerguntas().add(pergunta);
         return perguntaService.save(pergunta);
     }

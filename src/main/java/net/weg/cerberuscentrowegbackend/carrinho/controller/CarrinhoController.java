@@ -43,7 +43,7 @@ public class CarrinhoController {
 
     @PutMapping("/{idCarrinho}/adicionar-produto/{nomeProduto}")
     public void addProduto(@PathVariable Long idCarrinho,
-                           @PathVariable String nomeProduto) {
+                           @PathVariable Long nomeProduto) {
         Carrinho carrinho = carrinhoService.findOne(idCarrinho);
         Produto produto = produtoService.findById(nomeProduto);
         carrinhoService.addProduto(carrinho, produto);
@@ -51,7 +51,7 @@ public class CarrinhoController {
 
     @PutMapping("/{idCarrinho}/remover-produto/{idProduto}")
     public void rmProduto(@PathVariable Long idCarrinho,
-                          @PathVariable String idProduto) {
+                          @PathVariable Long idProduto) {
         Carrinho carrinho = carrinhoService.findOne(idCarrinho);
         Produto produto = produtoService.findById(idProduto);
         carrinhoService.rmProduto(carrinho, produto);

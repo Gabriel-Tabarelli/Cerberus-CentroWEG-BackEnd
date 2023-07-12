@@ -51,14 +51,14 @@ public class PessoaController {
         return service.findOne(id);
     }
 
-    @PutMapping("/{id}/adicionar-favorito/{nomeProduto}")
-    public void adicionarFavorito(@PathVariable Long id, @PathVariable String nomeProduto) {
-        service.adicionarFavorito(id, nomeProduto);
+    @PutMapping("/{id}/adicionar-favorito/{idProduto}")
+    public void adicionarFavorito(@PathVariable Long id, @PathVariable Long idProduto) {
+        service.adicionarFavorito(id, idProduto);
     }
 
-    @PutMapping("/{id}/remover-favorito/{nomeProduto}")
-    public void removerFavorito(@PathVariable Long id, @PathVariable String nomeProduto) {
-        service.removerFavorito(id, nomeProduto);
+    @PutMapping("/{id}/remover-favorito/{idProduto}")
+    public void removerFavorito(@PathVariable Long id, @PathVariable Long idProduto) {
+        service.removerFavorito(id, idProduto);
     }
 
 }

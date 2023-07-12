@@ -42,9 +42,9 @@ public class PessoaService {
         repository.save(pessoa);
     }
 
-    public void adicionarFavorito(Long id, String nomeProduto) {
+    public void adicionarFavorito(Long id, Long idProduto) {
         Pessoa pessoa = findOne(id);
-        Produto produto = produtoService.findById(nomeProduto);
+        Produto produto = produtoService.findById(idProduto);
         if (pessoa.getFavoritos().contains(produto)) {
             throw new RuntimeException("Produto já está na lista de favoritos");
         } else {
@@ -53,9 +53,9 @@ public class PessoaService {
         }
     }
 
-    public void removerFavorito(Long id, String nomeProduto) {
+    public void removerFavorito(Long id, Long idProduto) {
         Pessoa pessoa = findOne(id);
-        Produto produto = produtoService.findById(nomeProduto);
+        Produto produto = produtoService.findById(idProduto);
         pessoa.getFavoritos().remove(produto);
         update(pessoa);
     }
