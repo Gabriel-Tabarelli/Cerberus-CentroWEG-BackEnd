@@ -26,13 +26,13 @@ public class ProdutoService {
         repository.save(produto);
     }
 
-    public ProdutoSemPerguntasProjection findOne(String nome) {
-        return repository.findProdutoByNome(nome).orElseThrow(
+    public ProdutoSemPerguntasProjection findOneById(Long id) {
+        return repository.findProdutoById(id).orElseThrow(
                 ObjetoInexistenteException::new);
     }
 
-    public Produto findByNome(String nome) {
-        return repository.findByNome(nome).orElseThrow(
+    public Produto findById(Long id) {
+        return repository.findById(id).orElseThrow(
                 ObjetoInexistenteException::new);
     }
 
@@ -40,18 +40,21 @@ public class ProdutoService {
         return repository.findAllBy();
     }
 
-    public Boolean delete(Long id) {
-        repository.deleteById(id);
-        return !repository.existsById(id);
+    public List<ProdutoMinimizadoProjection> findAllMinimizado(Long categoriaId) {
+        return repository.findAllByCategoria_Id(categoriaId);
     }
 
-    public void addEspecificacao(String nome, Long idEspecificacao) {
+    public void delete(Long id) {
+        repository.deleteById(id);
+    }
+
+    public void addEspecificacao(Long id, Long idEspecificacao) {
         EspecificacaoProduto especificacao = especificacaoProdutoService.findOne(idEspecificacao);
-        Produto produto = findByNome(nome);
+        Produto produto = findById(id);
         produto.getEspecificacoes().add(especificacao);
     }
 
-    public Page<ProdutoPerguntasProjection> findPerguntas(String nomeProduto, Pageable pageable) {
-        return repository.findAllByNome(nomeProduto, pageable);
+    public Page<ProdutoPerguntasProjection> findPerguntas(Long id, Pageable pageable) {
+        return repository.findAllById(id, pageable);
     }
 }

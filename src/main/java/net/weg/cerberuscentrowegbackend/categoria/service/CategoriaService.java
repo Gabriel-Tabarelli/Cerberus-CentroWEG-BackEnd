@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import net.weg.cerberuscentrowegbackend.exception.ObjetoInexistenteException;
 import net.weg.cerberuscentrowegbackend.categoria.model.entity.Categoria;
 import net.weg.cerberuscentrowegbackend.categoria.repository.CategoriaRepository;
+import net.weg.cerberuscentrowegbackend.produto.service.ProdutoService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,27 +13,35 @@ import java.util.List;
 @AllArgsConstructor
 public class CategoriaService {
 
-    private CategoriaRepository categoriaRepository;
+    private CategoriaRepository repository;
+    private ProdutoService produtoService;
 
-    public Categoria save(Categoria categoria) {
-        return categoriaRepository.save(categoria);
+    public void save(Categoria categoria) {
+        repository.save(categoria);
     }
 
-    public Categoria update(Categoria categoria) {
-        return categoriaRepository.save(categoria);
+    public void update(Categoria categoria) {
+        repository.save(categoria);
     }
 
     public Categoria findOne(Long id) {
-        return categoriaRepository.findById(id).orElseThrow(
+        return repository.findById(id).orElseThrow(
                 ObjetoInexistenteException::new);
     }
 
     public List<Categoria> findAll() {
-        return categoriaRepository.findAll();
+        return repository.findAll();
     }
 
-    public Boolean delete(Long id) {
-        categoriaRepository.deleteById(id);
-        return !categoriaRepository.existsById(id);
+    public void delete(Long id) {
+        repository.deleteById(id);
+    }
+
+    public List<?> findCategorias(Long id) {
+        List<Categoria> categorias = repository.findAllByCategoria_Id(id);
+        if (categorias.isEmpty()) {
+            return produtoService.findAllMinimizado(id);
+        }
+        return categorias;
     }
 }

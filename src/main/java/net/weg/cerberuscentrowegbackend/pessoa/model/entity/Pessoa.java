@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import net.weg.cerberuscentrowegbackend.endereco.model.entity.Endereco;
+import net.weg.cerberuscentrowegbackend.pessoa.model.dto.PessoaEditarDto;
 import net.weg.cerberuscentrowegbackend.produto.model.entity.Produto;
 
 import java.util.List;
@@ -38,7 +39,11 @@ public class Pessoa {
     @ManyToMany
     private List<Produto> favoritos;
 
-    /*Fazer uma tabela de conexões entre um produto e um usuário para buscar essa tabela ao
-    logar e inscrever-se nos tópicos necessários para receber notificações,etc.*/
+    public void editar(PessoaEditarDto pessoaDto) {
+        setNome(pessoaDto.getNome());
+        setTelefone(pessoaDto.getTelefone());
+        setEndereco(pessoaDto.getEndereco());
+        setSenha(pessoaDto.getSenha());
+    }
 
 }
