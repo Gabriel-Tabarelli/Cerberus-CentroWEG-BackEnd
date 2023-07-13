@@ -2,6 +2,7 @@ package net.weg.cerberuscentrowegbackend.produto.controller;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import net.weg.cerberuscentrowegbackend.pessoa.model.entity.Notificacao;
 import net.weg.cerberuscentrowegbackend.produto.model.dto.PerguntaDto;
 import net.weg.cerberuscentrowegbackend.produto.model.entity.Produto;
 import net.weg.cerberuscentrowegbackend.produto.model.entity.Pergunta;
@@ -24,21 +25,14 @@ public class PerguntaController {
 
     @MessageMapping("/{idProduto}/perguntar") //Chegada da mensagem
     @SendTo("/topic/{idProduto}") //Envio da mensagem
-    public Pergunta perguntar(@Valid @Payload PerguntaDto perguntaDto,
-                              @DestinationVariable Long idProduto) {
+    public Notificacao perguntar(@Valid @Payload PerguntaDto perguntaDto,
+                                 @DestinationVariable Long idProduto) {
         Pergunta pergunta = new Pergunta();
         BeanUtils.copyProperties(perguntaDto, pergunta);
         Produto produto = produtoService.findById(idProduto);
         produto.getPerguntas().add(pergunta);
-        return perguntaService.save(pergunta);
-    }
-
-    @PostMapping("/api/pergunta")
-    public ResponseEntity<Void> perguntar(@RequestBody @Valid PerguntaDto perguntaDto) {
-        Pergunta pergunta = new Pergunta();
-        BeanUtils.copyProperties(perguntaDto, pergunta);
         perguntaService.save(pergunta);
-        return ResponseEntity.ok().build();
+        return new Notificacao(produto, pergunta.getPergunta());
     }
 
 }

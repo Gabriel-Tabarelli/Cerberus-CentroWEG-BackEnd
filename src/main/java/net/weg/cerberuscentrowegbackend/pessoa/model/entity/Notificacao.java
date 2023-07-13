@@ -1,24 +1,21 @@
 package net.weg.cerberuscentrowegbackend.pessoa.model.entity;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import net.weg.cerberuscentrowegbackend.produto.model.entity.Pergunta;
+import net.weg.cerberuscentrowegbackend.produto.model.entity.Produto;
 
-@Entity
-@AllArgsConstructor
-@NoArgsConstructor
+
 @Data
 public class Notificacao {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-//    @OneToOne
-//    private Produto produto;
-
-    @Column(nullable = false)
     private String notificacao;
+
+    public Notificacao(Produto produto, String notificacao) {
+        this.notificacao = "Nova pergunta sobre o produto " + produto.getNome() + ": " + notificacao;
+    }
+
+    public Notificacao(Pergunta pergunta, String notificacao) {
+        this.notificacao = "Nova resposta sobre a pergunta " + pergunta.getPergunta() + ": " + notificacao;
+    }
 
 }

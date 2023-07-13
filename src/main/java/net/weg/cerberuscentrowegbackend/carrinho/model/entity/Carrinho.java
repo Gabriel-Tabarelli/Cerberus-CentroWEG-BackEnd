@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import net.weg.cerberuscentrowegbackend.pessoa.model.entity.Pessoa;
 import net.weg.cerberuscentrowegbackend.produto.model.entity.Produto;
-import net.weg.cerberuscentrowegbackend.pessoa.model.entity.PessoaFisica;
 
 import java.util.List;
 

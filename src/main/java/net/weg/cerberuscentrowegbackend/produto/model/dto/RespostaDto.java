@@ -16,4 +16,7 @@ public class RespostaDto {
 
     @NotNull
     private String resposta;
+
+    @NotNull
+    private Long idPergunta;
 }

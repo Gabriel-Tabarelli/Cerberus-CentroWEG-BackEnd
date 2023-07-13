@@ -2,12 +2,16 @@ package net.weg.cerberuscentrowegbackend.produto.service;
 
 import lombok.AllArgsConstructor;
 import net.weg.cerberuscentrowegbackend.exception.ObjetoInexistenteException;
+import net.weg.cerberuscentrowegbackend.pessoa.model.entity.Pessoa;
+import net.weg.cerberuscentrowegbackend.pessoa.service.PessoaService;
+import net.weg.cerberuscentrowegbackend.produto.model.dto.ProdutoDto;
 import net.weg.cerberuscentrowegbackend.produto.model.entity.EspecificacaoProduto;
 import net.weg.cerberuscentrowegbackend.produto.model.entity.Produto;
 import net.weg.cerberuscentrowegbackend.produto.model.projection.ProdutoMinimizadoProjection;
 import net.weg.cerberuscentrowegbackend.produto.model.projection.ProdutoPerguntasProjection;
 import net.weg.cerberuscentrowegbackend.produto.model.projection.ProdutoSemPerguntasProjection;
 import net.weg.cerberuscentrowegbackend.produto.repository.ProdutoRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -21,8 +25,20 @@ public class ProdutoService {
     private ProdutoRepository repository;
 
     private EspecificacaoProdutoService especificacaoProdutoService;
+    private PessoaService pessoaService;
 
-    public void save(Produto produto) {
+    public void save(ProdutoDto produtoDto) {
+        Produto produto = new Produto();
+        BeanUtils.copyProperties(produtoDto, produto);
+        produtoDto.getPerguntas().forEach(pergunta -> {
+            pergunta.getListaRespostas().forEach(resposta -> {
+                Pessoa pessoa = pessoaService.findOne(resposta.getPessoa().getId());
+                resposta.setPessoa(pessoa);
+            });
+            Pessoa pessoa = pessoaService.findOne(pergunta.getPessoa().getId());
+            pergunta.setPessoa(pessoa);
+            pergunta.setProduto(produto);
+        });
         repository.save(produto);
     }
 

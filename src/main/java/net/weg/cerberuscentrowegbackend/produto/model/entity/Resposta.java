@@ -22,4 +22,9 @@ public class Resposta {
     @Column(nullable = false)
     private String resposta;
 
+    public Resposta(Pessoa pessoa, String resposta) {
+        this.pessoa = pessoa;
+        this.resposta = resposta;
+    }
+
 }
