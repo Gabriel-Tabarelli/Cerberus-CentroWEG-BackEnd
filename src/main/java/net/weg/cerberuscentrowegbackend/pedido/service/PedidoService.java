@@ -14,12 +14,12 @@ public class PedidoService {
 
     private PedidoRepository pedidoRepository;
 
-    public Pedido save(Pedido pedido) {
-        return pedidoRepository.save(pedido);
+    public void save(Pedido pedido) {
+        pedidoRepository.save(pedido);
     }
 
-    public Pedido update(Pedido pedido) {
-        return pedidoRepository.save(pedido);
+    public void update(Pedido pedido) {
+        pedidoRepository.save(pedido);
     }
 
     public Pedido findOne(Long id) {
@@ -27,13 +27,8 @@ public class PedidoService {
                 ObjetoInexistenteException::new);
     }
 
-    public List<Pedido> findAll() {
-        return pedidoRepository.findAll();
-    }
-
-    public Boolean delete(Long id) {
+    public void delete(Long id) {
         pedidoRepository.deleteById(id);
-        return !pedidoRepository.existsById(id);
     }
 
 }

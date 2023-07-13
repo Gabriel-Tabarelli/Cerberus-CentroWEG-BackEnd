@@ -21,20 +21,23 @@ public class EnderecoController {
     private EnderecoService enderecoService;
 
     @PostMapping
-    public ResponseEntity<Endereco> save(@RequestBody @Valid EnderecoDto enderecoDto) {
+    public ResponseEntity<Void> save(@RequestBody @Valid EnderecoDto enderecoDto) {
         Endereco endereco = new Endereco();
         BeanUtils.copyProperties(enderecoDto, endereco);
-        return ResponseEntity.ok(enderecoService.save(endereco));
+        enderecoService.save(endereco);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping
-    public ResponseEntity<Endereco> update(@RequestBody @Valid Endereco endereco) {
-        return ResponseEntity.ok(enderecoService.update(endereco));
+    public ResponseEntity<Void> update(@RequestBody @Valid Endereco endereco) {
+        enderecoService.update(endereco);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Boolean> delete(@PathVariable Long id) {
-        return ResponseEntity.ok(enderecoService.delete(id));
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        enderecoService.delete(id);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{id}")

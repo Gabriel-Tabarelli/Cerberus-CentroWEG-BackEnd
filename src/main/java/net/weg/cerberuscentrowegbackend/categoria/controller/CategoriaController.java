@@ -20,20 +20,21 @@ public class CategoriaController {
     private CategoriaService service;
 
     @PostMapping
-    public void save(@RequestBody @Valid CategoriaDto categoriaDto) {
+    public ResponseEntity<Void> save(@RequestBody @Valid CategoriaDto categoriaDto) {
         Categoria categoria = new Categoria();
         BeanUtils.copyProperties(categoriaDto, categoria);
         service.save(categoria);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{id}")
-    public List<?> findCategorias(@PathVariable Long id) {
-        return service.findCategorias(id);
+    public ResponseEntity<?> findCategorias(@PathVariable Long id) {
+        return ResponseEntity.ok(service.findCategorias(id));
     }
 
     @GetMapping()
-    public List<Categoria> findAll() {
-        return service.findAll();
+    public ResponseEntity<List<Categoria>> findAll() {
+        return ResponseEntity.ok(service.findAll());
     }
 
 }

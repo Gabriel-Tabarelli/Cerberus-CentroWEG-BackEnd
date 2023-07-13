@@ -16,7 +16,6 @@ public class Notificacao {
     private Long id;
 
 //    @OneToOne
-//    @Column(nullable = false)
 //    private Produto produto;
 
     @Column(nullable = false)

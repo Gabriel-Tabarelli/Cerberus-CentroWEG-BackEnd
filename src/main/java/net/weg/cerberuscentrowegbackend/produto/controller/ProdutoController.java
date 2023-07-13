@@ -34,7 +34,7 @@ public class ProdutoController {
     private PessoaService pessoaService;
 
     @PostMapping
-    public void create(@RequestBody @Valid ProdutoDto produtoDto) {
+    public ResponseEntity<Void> create(@RequestBody @Valid ProdutoDto produtoDto) {
         Produto produto = new Produto();
         BeanUtils.copyProperties(produtoDto, produto);
         for (Pergunta pergunta : produtoDto.getPerguntas()) {
@@ -47,11 +47,13 @@ public class ProdutoController {
             pergunta.setProduto(produto);
         }
         service.save(produto);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
+        return ResponseEntity.ok().build();
     }
 
 
@@ -77,9 +79,10 @@ public class ProdutoController {
     }
 
     @PutMapping("/{id}/adicionar-especificacao/{idEspecificacao}")
-    public void addEspecificacao(@PathVariable Long id,
+    public ResponseEntity<Void> addEspecificacao(@PathVariable Long id,
                                                     @PathVariable Long idEspecificacao) {
         service.addEspecificacao(id, idEspecificacao);
+        return ResponseEntity.ok().build();
     }
 
 }

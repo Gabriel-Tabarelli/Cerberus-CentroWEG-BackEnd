@@ -5,7 +5,6 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import net.weg.cerberuscentrowegbackend.endereco.model.entity.Endereco;
-import net.weg.cerberuscentrowegbackend.pessoa.model.dto.PessoaEditarDto;
 import net.weg.cerberuscentrowegbackend.produto.model.entity.Produto;
 
 import java.util.List;
@@ -38,12 +37,5 @@ public class Pessoa {
 
     @ManyToMany
     private List<Produto> favoritos;
-
-    public void editar(PessoaEditarDto pessoaDto) {
-        setNome(pessoaDto.getNome());
-        setTelefone(pessoaDto.getTelefone());
-        setEndereco(pessoaDto.getEndereco());
-        setSenha(pessoaDto.getSenha());
-    }
 
 }

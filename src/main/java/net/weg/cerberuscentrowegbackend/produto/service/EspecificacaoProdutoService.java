@@ -14,12 +14,12 @@ public class EspecificacaoProdutoService {
 
     private EspecificacaoProdutoRepository especificacaoProdutoRepository;
 
-    public EspecificacaoProduto save(EspecificacaoProduto especificacaoProduto) {
-        return especificacaoProdutoRepository.save(especificacaoProduto);
+    public void save(EspecificacaoProduto especificacaoProduto) {
+        especificacaoProdutoRepository.save(especificacaoProduto);
     }
 
-    public EspecificacaoProduto update(EspecificacaoProduto especificacaoProduto) {
-        return especificacaoProdutoRepository.save(especificacaoProduto);
+    public void update(EspecificacaoProduto especificacaoProduto) {
+        especificacaoProdutoRepository.save(especificacaoProduto);
     }
 
     public EspecificacaoProduto findOne(Long id) {
@@ -27,13 +27,8 @@ public class EspecificacaoProdutoService {
                 ObjetoInexistenteException::new);
     }
 
-    public List<EspecificacaoProduto> findAll() {
-        return especificacaoProdutoRepository.findAll();
-    }
-
-    public Boolean delete(Long id) {
+    public void delete(Long id) {
         especificacaoProdutoRepository.deleteById(id);
-        return !especificacaoProdutoRepository.existsById(id);
     }
 
 }

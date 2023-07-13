@@ -8,6 +8,7 @@ import net.weg.cerberuscentrowegbackend.produto.model.entity.Pergunta;
 import net.weg.cerberuscentrowegbackend.produto.service.ProdutoService;
 import net.weg.cerberuscentrowegbackend.produto.service.PerguntaService;
 import org.springframework.beans.BeanUtils;
+import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -33,10 +34,11 @@ public class PerguntaController {
     }
 
     @PostMapping("/api/pergunta")
-    public void perguntar(@RequestBody @Valid PerguntaDto perguntaDto) {
+    public ResponseEntity<Void> perguntar(@RequestBody @Valid PerguntaDto perguntaDto) {
         Pergunta pergunta = new Pergunta();
         BeanUtils.copyProperties(perguntaDto, pergunta);
         perguntaService.save(pergunta);
+        return ResponseEntity.ok().build();
     }
 
 }

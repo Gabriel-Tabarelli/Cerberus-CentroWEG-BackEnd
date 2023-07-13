@@ -14,12 +14,12 @@ public class EnderecoService {
 
     private EnderecoRepository enderecoRepository;
 
-    public Endereco save(Endereco endereco) {
-        return enderecoRepository.save(endereco);
+    public void save(Endereco endereco) {
+        enderecoRepository.save(endereco);
     }
 
-    public Endereco update(Endereco endereco) {
-        return enderecoRepository.save(endereco);
+    public void update(Endereco endereco) {
+        enderecoRepository.save(endereco);
     }
 
     public Endereco findOne(Long id) {
@@ -27,13 +27,8 @@ public class EnderecoService {
                 ObjetoInexistenteException::new);
     }
 
-    public List<Endereco> findAll() {
-        return enderecoRepository.findAll();
-    }
-
-    public Boolean delete(Long id) {
+    public void delete(Long id) {
         enderecoRepository.deleteById(id);
-        return !enderecoRepository.existsById(id);
     }
     
 }

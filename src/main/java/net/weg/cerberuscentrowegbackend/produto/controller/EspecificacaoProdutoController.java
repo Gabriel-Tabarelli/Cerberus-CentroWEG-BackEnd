@@ -20,30 +20,17 @@ public class EspecificacaoProdutoController {
     private EspecificacaoProdutoService especificacaoProdutoService;
 
     @PostMapping
-    public ResponseEntity<EspecificacaoProduto> create(@RequestBody @Valid EspecificacaoProdutoDto especificacaoProdutoDto) {
+    public ResponseEntity<Void> create(@RequestBody @Valid EspecificacaoProdutoDto especificacaoProdutoDto) {
         EspecificacaoProduto especificacaoProduto = new EspecificacaoProduto();
         BeanUtils.copyProperties(especificacaoProdutoDto, especificacaoProduto);
-        return ResponseEntity.ok(especificacaoProdutoService.save(especificacaoProduto));
-    }
-
-    @PutMapping
-    public ResponseEntity<EspecificacaoProduto> update(@RequestBody @Valid EspecificacaoProduto especificacaoProduto) {
-        return ResponseEntity.ok(especificacaoProdutoService.update(especificacaoProduto));
+        especificacaoProdutoService.save(especificacaoProduto);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Boolean> delete(@PathVariable Long id) {
-        return ResponseEntity.ok(especificacaoProdutoService.delete(id));
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<EspecificacaoProduto> findOne(@PathVariable Long id) {
-        return ResponseEntity.ok(especificacaoProdutoService.findOne(id));
-    }
-
-    @GetMapping()
-    public ResponseEntity<List<EspecificacaoProduto>> findAll() {
-        return ResponseEntity.ok(especificacaoProdutoService.findAll());
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        especificacaoProdutoService.delete(id);
+        return ResponseEntity.ok().build();
     }
     
 }

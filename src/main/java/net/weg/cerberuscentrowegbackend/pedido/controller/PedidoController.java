@@ -20,30 +20,28 @@ public class PedidoController {
     private PedidoService pedidoService;
 
     @PostMapping
-    public ResponseEntity<Pedido> save(@RequestBody @Valid PedidoDto pedidoDto) {
+    public ResponseEntity<Void> save(@RequestBody @Valid PedidoDto pedidoDto) {
         Pedido pedido = new Pedido();
         BeanUtils.copyProperties(pedidoDto, pedido);
-        return ResponseEntity.ok(pedidoService.save(pedido));
+        pedidoService.save(pedido);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping
-    public ResponseEntity<Pedido> update(@RequestBody @Valid Pedido pedido) {
-        return ResponseEntity.ok(pedidoService.update(pedido));
+    public ResponseEntity<Void> update(@RequestBody @Valid Pedido pedido) {
+        pedidoService.update(pedido);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Boolean> delete(@PathVariable Long id) {
-        return ResponseEntity.ok(pedidoService.delete(id));
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        pedidoService.delete(id);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Pedido> findOne(@PathVariable Long id) {
         return ResponseEntity.ok(pedidoService.findOne(id));
-    }
-
-    @GetMapping()
-    public ResponseEntity<List<Pedido>> findAll() {
-        return ResponseEntity.ok(pedidoService.findAll());
     }
     
 }
