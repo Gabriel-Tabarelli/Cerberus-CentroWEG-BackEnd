@@ -19,6 +19,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -55,8 +56,8 @@ public class ProdutoController {
 
 
     @GetMapping("/{id}")
-    public ProdutoSemPerguntasProjection findOne(@PathVariable Long id) {
-        return service.findOneById(id);
+    public ResponseEntity<ProdutoSemPerguntasProjection> findOne(@PathVariable Long id) {
+        return ResponseEntity.ok(service.findOneById(id));
     }
 
     @GetMapping("/get/minimizados")
@@ -67,12 +68,12 @@ public class ProdutoController {
     }
 
     @GetMapping("/{id}/perguntas")
-    public Page<ProdutoPerguntasProjection> findPerguntas(
+    public ResponseEntity<Page<ProdutoPerguntasProjection>> findPerguntas(
             @PathVariable Long id,
             @RequestParam("page") int page
     ) {
         Pageable pageable = PageRequest.of(page, 3, Sort.by("nome").descending());
-        return service.findPerguntas(id, pageable);
+        return ResponseEntity.ok(service.findPerguntas(id, pageable));
     }
 
     @PutMapping("/{id}/adicionar-especificacao/{idEspecificacao}")
