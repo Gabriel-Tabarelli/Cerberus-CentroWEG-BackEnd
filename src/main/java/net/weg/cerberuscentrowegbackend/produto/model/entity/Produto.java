@@ -40,4 +40,8 @@ public class Produto {
     @JsonIgnore
     private List<Pergunta> perguntas;
 
+    public Produto(Long id) {
+        this.id = id;
+    }
+
 }

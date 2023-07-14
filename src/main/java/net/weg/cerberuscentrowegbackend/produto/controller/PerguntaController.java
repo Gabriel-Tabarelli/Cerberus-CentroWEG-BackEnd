@@ -3,13 +3,13 @@ package net.weg.cerberuscentrowegbackend.produto.controller;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import net.weg.cerberuscentrowegbackend.pessoa.model.entity.Notificacao;
+import net.weg.cerberuscentrowegbackend.pessoa.model.entity.Pessoa;
 import net.weg.cerberuscentrowegbackend.produto.model.dto.PerguntaDto;
 import net.weg.cerberuscentrowegbackend.produto.model.entity.Produto;
 import net.weg.cerberuscentrowegbackend.produto.model.entity.Pergunta;
 import net.weg.cerberuscentrowegbackend.produto.service.ProdutoService;
 import net.weg.cerberuscentrowegbackend.produto.service.PerguntaService;
 import org.springframework.beans.BeanUtils;
-import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -29,10 +29,12 @@ public class PerguntaController {
                                  @DestinationVariable Long idProduto) {
         Pergunta pergunta = new Pergunta();
         BeanUtils.copyProperties(perguntaDto, pergunta);
-        Produto produto = produtoService.findById(idProduto);
-        produto.getPerguntas().add(pergunta);
+        pergunta.setProduto(new Produto(idProduto));
+        System.out.println(perguntaDto.getIdPessoa());
+        pergunta.setPessoa(new Pessoa(perguntaDto.getIdPessoa()));
+        System.out.println(pergunta);
         perguntaService.save(pergunta);
-        return new Notificacao(produto, pergunta.getPergunta());
+        return new Notificacao(new Produto(), pergunta.getPergunta());
     }
 
 }

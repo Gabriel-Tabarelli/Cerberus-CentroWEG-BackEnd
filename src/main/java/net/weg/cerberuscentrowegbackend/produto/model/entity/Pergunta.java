@@ -19,7 +19,7 @@ public class Pergunta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     private Pessoa pessoa;
 
     @ManyToOne

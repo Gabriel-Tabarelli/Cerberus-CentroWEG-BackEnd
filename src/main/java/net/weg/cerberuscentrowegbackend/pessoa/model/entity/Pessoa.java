@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-import net.weg.cerberuscentrowegbackend.carrinho.model.entity.Carrinho;
+import lombok.NoArgsConstructor;
 import net.weg.cerberuscentrowegbackend.endereco.model.entity.Endereco;
 import net.weg.cerberuscentrowegbackend.produto.model.entity.Produto;
 
@@ -12,6 +12,7 @@ import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@NoArgsConstructor
 @Data
 public class Pessoa {
 
@@ -38,5 +39,9 @@ public class Pessoa {
 
     @ManyToMany
     private List<Produto> favoritos;
+
+    public Pessoa(Long id) {
+        this.id = id;
+    }
 
 }
