@@ -25,15 +25,14 @@ import org.springframework.web.bind.annotation.*;
 public class RespostaController {
 
     private final RespostaService respostaService;
-    private final PerguntaService perguntaService;
 
-    @MessageMapping("/{idProduto}/responder") //Chegada da mensagem
-    @SendTo("/topic/{idProduto}") //Envio da mensagem
-    public Notificacao perguntar(@Valid @Payload RespostaDto respostaDto) {
-        Resposta resposta = new Resposta(respostaDto.getPessoa(), respostaDto.getResposta());
-        Pergunta pergunta = perguntaService.getOne(respostaDto.getIdPergunta());
-        respostaService.save(resposta, pergunta);
-        return new Notificacao(pergunta, resposta.getResposta());
+    @MessageMapping("/{idPergunta}/responder") //Chegada da mensagem | Onde enviar a mensagem
+    @SendTo("/topic/pergunta/{idPergunta}") //Envio da mensagem | Onde inscrever-se para receber a mensagem
+    public Notificacao perguntar(@Valid @Payload RespostaDto respostaDto,
+                                 @DestinationVariable Long idPergunta) {
+        Resposta resposta = new Resposta(respostaDto, idPergunta);
+        respostaService.save(resposta);
+        return new Notificacao(resposta);
     }
 
 }

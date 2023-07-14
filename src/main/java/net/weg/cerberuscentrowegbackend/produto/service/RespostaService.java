@@ -12,8 +12,7 @@ public class RespostaService {
 
     private final RespostaRepository respostaRepository;
 
-    public void save(Resposta resposta, Pergunta pergunta) {
-        pergunta.getListaRespostas().add(resposta);
+    public void save(Resposta resposta) {
         respostaRepository.save(resposta);
     }
 

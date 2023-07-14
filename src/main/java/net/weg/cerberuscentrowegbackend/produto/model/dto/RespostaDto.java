@@ -12,7 +12,7 @@ import net.weg.cerberuscentrowegbackend.pessoa.model.entity.Pessoa;
 public class RespostaDto {
 
     @NotNull
-    private Pessoa pessoa;
+    private Long idPessoa;
 
     @NotNull
     private String resposta;

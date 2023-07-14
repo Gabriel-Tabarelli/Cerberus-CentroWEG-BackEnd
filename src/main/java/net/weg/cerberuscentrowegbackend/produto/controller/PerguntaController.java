@@ -21,20 +21,15 @@ import org.springframework.web.bind.annotation.*;
 public class PerguntaController {
 
     private PerguntaService perguntaService;
-    private ProdutoService produtoService;
 
-    @MessageMapping("/{idProduto}/perguntar") //Chegada da mensagem
-    @SendTo("/topic/{idProduto}") //Envio da mensagem
+    @MessageMapping("/{idProduto}/perguntar") //Chegada da mensagem | Onde enviar a mensagem
+    @SendTo("/topic/perguntas") //Envio da mensagem | Onde inscrever-se para receber a mensagem
     public Notificacao perguntar(@Valid @Payload PerguntaDto perguntaDto,
                                  @DestinationVariable Long idProduto) {
-        Pergunta pergunta = new Pergunta();
-        BeanUtils.copyProperties(perguntaDto, pergunta);
-        pergunta.setProduto(new Produto(idProduto));
-        System.out.println(perguntaDto.getIdPessoa());
-        pergunta.setPessoa(new Pessoa(perguntaDto.getIdPessoa()));
-        System.out.println(pergunta);
+        Pergunta pergunta = new Pergunta(perguntaDto, idProduto);
         perguntaService.save(pergunta);
-        return new Notificacao(new Produto(), pergunta.getPergunta());
+        System.out.println(new Notificacao(pergunta));
+        return new Notificacao(pergunta);
     }
 
 }

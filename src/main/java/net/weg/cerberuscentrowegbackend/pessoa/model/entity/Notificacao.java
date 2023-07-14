@@ -2,20 +2,21 @@ package net.weg.cerberuscentrowegbackend.pessoa.model.entity;
 
 import lombok.Data;
 import net.weg.cerberuscentrowegbackend.produto.model.entity.Pergunta;
-import net.weg.cerberuscentrowegbackend.produto.model.entity.Produto;
+import net.weg.cerberuscentrowegbackend.produto.model.entity.Resposta;
 
 
 @Data
 public class Notificacao {
 
-    private String notificacao;
+    private Pergunta pergunta;
+    private Resposta resposta;
 
-    public Notificacao(Produto produto, String notificacao) {
-        this.notificacao = "Nova pergunta sobre o produto " + produto.getNome() + ": " + notificacao;
+    public Notificacao(Pergunta pergunta) {
+        this.pergunta = pergunta;
     }
 
-    public Notificacao(Pergunta pergunta, String notificacao) {
-        this.notificacao = "Nova resposta sobre a pergunta " + pergunta.getPergunta() + ": " + notificacao;
+    public Notificacao(Resposta resposta) {
+        this.resposta = resposta;
     }
 
 }
