@@ -8,6 +8,7 @@ import net.weg.cerberuscentrowegbackend.pessoa.model.entity.Pessoa;
 import net.weg.cerberuscentrowegbackend.pessoa.model.entity.PessoaFisica;
 import net.weg.cerberuscentrowegbackend.pessoa.model.entity.PessoaJuridica;
 import net.weg.cerberuscentrowegbackend.pessoa.service.PessoaService;
+import net.weg.cerberuscentrowegbackend.produto.model.entity.Produto;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -53,15 +54,17 @@ public class PessoaController {
         return ResponseEntity.ok(service.findOne(id));
     }
 
-    @PutMapping("/{id}/adicionar-favorito/{idProduto}")
-    public ResponseEntity<Void> adicionarFavorito(@PathVariable Long id, @PathVariable Long idProduto) {
-        service.adicionarFavorito(id, idProduto);
+    @PutMapping("/{id}/adicionar-favorito")
+    public ResponseEntity<Void> adicionarFavorito(@PathVariable Long id, @RequestBody Produto produto) {
+        Pessoa pessoa = service.findOne(id);
+        service.adicionarFavorito(pessoa, produto);
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/{id}/remover-favorito/{idProduto}")
-    public ResponseEntity<Void> removerFavorito(@PathVariable Long id, @PathVariable Long idProduto) {
-        service.removerFavorito(id, idProduto);
+    @PutMapping("/{id}/remover-favorito")
+    public ResponseEntity<Void> removerFavorito(@PathVariable Long id, @RequestBody Produto produto) {
+        Pessoa pessoa = service.findOne(id);
+        service.removerFavorito(pessoa, produto);
         return ResponseEntity.ok().build();
     }
 

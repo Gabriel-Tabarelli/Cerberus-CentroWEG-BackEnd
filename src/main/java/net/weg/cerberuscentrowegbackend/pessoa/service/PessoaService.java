@@ -20,8 +20,6 @@ public class PessoaService {
     private PessoaJuridicaRepository juridicaRepository;
     private PessoaFisicaRepository fisicaRepository;
 
-    private ProdutoService produtoService;
-
     public void save(PessoaJuridica pessoa) {
         juridicaRepository.save(pessoa);
     }
@@ -42,9 +40,7 @@ public class PessoaService {
         repository.save(pessoa);
     }
 
-    public void adicionarFavorito(Long id, Long idProduto) {
-        Pessoa pessoa = findOne(id);
-        Produto produto = produtoService.findById(idProduto);
+    public void adicionarFavorito(Pessoa pessoa, Produto produto) {
         if (pessoa.getFavoritos().contains(produto)) {
             throw new RuntimeException("Produto já está na lista de favoritos");
         } else {
@@ -53,9 +49,7 @@ public class PessoaService {
         }
     }
 
-    public void removerFavorito(Long id, Long idProduto) {
-        Pessoa pessoa = findOne(id);
-        Produto produto = produtoService.findById(idProduto);
+    public void removerFavorito(Pessoa pessoa, Produto produto) {
         pessoa.getFavoritos().remove(produto);
         update(pessoa);
     }

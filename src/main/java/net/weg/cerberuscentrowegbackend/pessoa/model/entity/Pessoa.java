@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import net.weg.cerberuscentrowegbackend.carrinho.model.entity.Carrinho;
 import net.weg.cerberuscentrowegbackend.endereco.model.entity.Endereco;
 import net.weg.cerberuscentrowegbackend.produto.model.entity.Produto;
 
