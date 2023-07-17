@@ -1,11 +1,12 @@
-package net.weg.cerberuscentrowegbackend.produto.model.entity;
+package net.weg.cerberuscentrowegbackend.resposta.model.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.weg.cerberuscentrowegbackend.pergunta.model.entity.Pergunta;
 import net.weg.cerberuscentrowegbackend.pessoa.model.entity.Pessoa;
-import net.weg.cerberuscentrowegbackend.produto.model.dto.RespostaDto;
+import net.weg.cerberuscentrowegbackend.resposta.model.dto.RespostaDto;
 
 @Entity
 @AllArgsConstructor

@@ -15,7 +15,7 @@ import java.util.List;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/endereco")
+@RequestMapping("/api/endereco")
 public class EnderecoController {
 
     private EnderecoService enderecoService;

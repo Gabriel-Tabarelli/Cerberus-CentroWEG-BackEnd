@@ -1,4 +1,4 @@
-package net.weg.cerberuscentrowegbackend.produto.model.dto;
+package net.weg.cerberuscentrowegbackend.resposta.model.dto;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

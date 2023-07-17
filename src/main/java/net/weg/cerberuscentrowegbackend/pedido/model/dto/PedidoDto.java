@@ -4,7 +4,9 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import net.weg.cerberuscentrowegbackend.carrinho.model.entity.Carrinho;
+import net.weg.cerberuscentrowegbackend.produto.model.entity.Produto;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -12,6 +14,8 @@ import net.weg.cerberuscentrowegbackend.carrinho.model.entity.Carrinho;
 public class PedidoDto {
 
     @NotNull
-    private Carrinho carrinho;
+    private List<Produto> produtos;
+
+    private Long idPessoa;
 
 }

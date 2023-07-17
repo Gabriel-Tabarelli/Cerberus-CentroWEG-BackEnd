@@ -64,12 +64,6 @@ public class ProdutoService {
         repository.deleteById(id);
     }
 
-    public void addEspecificacao(Long id, Long idEspecificacao) {
-        EspecificacaoProduto especificacao = especificacaoProdutoService.findOne(idEspecificacao);
-        Produto produto = findById(id);
-        produto.getEspecificacoes().add(especificacao);
-    }
-
     public Page<ProdutoPerguntasProjection> findPerguntas(Long id, Pageable pageable) {
         return repository.findAllById(id, pageable);
     }

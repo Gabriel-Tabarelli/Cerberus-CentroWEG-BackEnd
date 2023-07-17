@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import net.weg.cerberuscentrowegbackend.categoria.model.entity.Categoria;
-import net.weg.cerberuscentrowegbackend.produto.model.projection.ProdutoMinimizadoProjection;
+import net.weg.cerberuscentrowegbackend.pergunta.model.entity.Pergunta;
 
 import java.util.List;
 

@@ -59,11 +59,4 @@ public class ProdutoController {
         return ResponseEntity.ok(service.findPerguntas(id, pageable));
     }
 
-    @PutMapping("/{id}/adicionar-especificacao/{idEspecificacao}")
-    public ResponseEntity<Void> addEspecificacao(@PathVariable Long id,
-                                                 @PathVariable Long idEspecificacao) {
-        service.addEspecificacao(id, idEspecificacao);
-        return ResponseEntity.ok().build();
-    }
-
 }

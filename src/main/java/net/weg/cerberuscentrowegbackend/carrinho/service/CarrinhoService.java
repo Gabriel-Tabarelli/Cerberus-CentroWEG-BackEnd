@@ -1,6 +1,7 @@
 package net.weg.cerberuscentrowegbackend.carrinho.service;
 
 import lombok.AllArgsConstructor;
+import net.weg.cerberuscentrowegbackend.carrinho.model.projectin.CarrinhoIdProdutosProjection;
 import net.weg.cerberuscentrowegbackend.exception.ObjetoInexistenteException;
 import net.weg.cerberuscentrowegbackend.carrinho.model.entity.Carrinho;
 import net.weg.cerberuscentrowegbackend.produto.model.entity.Produto;
@@ -17,26 +18,22 @@ public class CarrinhoService {
         carrinhoRepository.save(carrinho);
     }
 
-    public void update(Carrinho carrinho) {
-        carrinhoRepository.save(carrinho);
-    }
-
     public Carrinho findOne(Long id) {
         return carrinhoRepository.findById(id).orElseThrow(
                 ObjetoInexistenteException::new);
     }
 
-    public void delete(Long id) {
-        carrinhoRepository.deleteById(id);
+    public CarrinhoIdProdutosProjection findOneProjection(Long idPessoa) {
+        return carrinhoRepository.findCarrinhoByPessoa_Id(idPessoa).orElseThrow(
+                ObjetoInexistenteException::new);
     }
 
-    public void addProduto(Carrinho carrinho, Produto produto) {
-        carrinho.getProdutos().add(produto);
-        carrinhoRepository.save(carrinho);
-    }
-
-    public void rmProduto(Carrinho carrinho, Produto produto) {
-        carrinho.getProdutos().remove(produto);
+    public void addRmProduto(Carrinho carrinho, Produto produto) {
+        if (carrinho.getProdutos().contains(produto)) {
+            carrinho.getProdutos().remove(produto);
+        } else {
+            carrinho.getProdutos().add(produto);
+        }
         carrinhoRepository.save(carrinho);
     }
 }

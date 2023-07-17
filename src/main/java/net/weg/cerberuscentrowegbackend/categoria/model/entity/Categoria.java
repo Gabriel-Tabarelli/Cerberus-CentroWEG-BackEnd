@@ -18,6 +18,9 @@ public class Categoria {
     @Column(nullable = false)
     private String nome;
 
+    @Column(nullable = false)
+    private String urlIcone;
+
     @OneToOne(cascade = CascadeType.ALL)
     private Categoria categoria;
 

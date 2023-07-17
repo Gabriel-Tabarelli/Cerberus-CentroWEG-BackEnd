@@ -1,9 +1,9 @@
-package net.weg.cerberuscentrowegbackend.produto.service;
+package net.weg.cerberuscentrowegbackend.pergunta.service;
 
 import com.sun.jdi.ObjectCollectedException;
 import lombok.AllArgsConstructor;
-import net.weg.cerberuscentrowegbackend.produto.model.entity.Pergunta;
-import net.weg.cerberuscentrowegbackend.produto.repository.PerguntaRepository;
+import net.weg.cerberuscentrowegbackend.pergunta.model.entity.Pergunta;
+import net.weg.cerberuscentrowegbackend.pergunta.repository.PerguntaRepository;
 import org.springframework.stereotype.Service;
 
 @Service

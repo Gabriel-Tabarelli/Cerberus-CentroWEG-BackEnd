@@ -1,9 +1,8 @@
-package net.weg.cerberuscentrowegbackend.produto.service;
+package net.weg.cerberuscentrowegbackend.resposta.service;
 
 import lombok.AllArgsConstructor;
-import net.weg.cerberuscentrowegbackend.produto.model.entity.Pergunta;
-import net.weg.cerberuscentrowegbackend.produto.model.entity.Resposta;
-import net.weg.cerberuscentrowegbackend.produto.repository.RespostaRepository;
+import net.weg.cerberuscentrowegbackend.resposta.model.entity.Resposta;
+import net.weg.cerberuscentrowegbackend.resposta.repository.RespostaRepository;
 import org.springframework.stereotype.Service;
 
 @Service

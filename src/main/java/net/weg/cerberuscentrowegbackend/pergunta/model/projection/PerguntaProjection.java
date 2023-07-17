@@ -1,6 +1,7 @@
-package net.weg.cerberuscentrowegbackend.produto.model.projection;
+package net.weg.cerberuscentrowegbackend.pergunta.model.projection;
 
 import net.weg.cerberuscentrowegbackend.pessoa.model.projection.PessoaNomeProjection;
+import net.weg.cerberuscentrowegbackend.resposta.model.projection.RespostaProjection;
 
 import java.util.List;
 

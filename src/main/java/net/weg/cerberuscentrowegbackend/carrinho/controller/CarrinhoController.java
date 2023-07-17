@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import net.weg.cerberuscentrowegbackend.carrinho.model.dto.CarrinhoDto;
 import net.weg.cerberuscentrowegbackend.carrinho.model.entity.Carrinho;
+import net.weg.cerberuscentrowegbackend.carrinho.model.projectin.CarrinhoIdProdutosProjection;
 import net.weg.cerberuscentrowegbackend.produto.model.entity.Produto;
 import net.weg.cerberuscentrowegbackend.carrinho.service.CarrinhoService;
 import net.weg.cerberuscentrowegbackend.produto.service.ProdutoService;
@@ -28,38 +29,17 @@ public class CarrinhoController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping
-    public ResponseEntity<Void> update(@RequestBody @Valid Carrinho carrinho) {
-        carrinhoService.update(carrinho);
-        return ResponseEntity.ok().build();
+    @GetMapping("/{idPessoa}")
+    public ResponseEntity<CarrinhoIdProdutosProjection> findOne(@PathVariable Long idPessoa) {
+        return ResponseEntity.ok(carrinhoService.findOneProjection(idPessoa));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        carrinhoService.delete(id);
-        return ResponseEntity.ok().build();
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Carrinho> findOne(@PathVariable Long id) {
-        return ResponseEntity.ok(carrinhoService.findOne(id));
-    }
-
-    @PutMapping("/{idCarrinho}/adicionar-produto/{nomeProduto}")
-    public ResponseEntity<Void> addProduto(@PathVariable Long idCarrinho,
-                                           @PathVariable Long nomeProduto) {
-        Carrinho carrinho = carrinhoService.findOne(idCarrinho);
-        Produto produto = produtoService.findById(nomeProduto);
-        carrinhoService.addProduto(carrinho, produto);
-        return ResponseEntity.ok().build();
-    }
-
-    @PutMapping("/{idCarrinho}/remover-produto/{idProduto}")
-    public ResponseEntity<Void> rmProduto(@PathVariable Long idCarrinho,
-                                          @PathVariable Long idProduto) {
-        Carrinho carrinho = carrinhoService.findOne(idCarrinho);
+    @PutMapping("/{idPessoa}/adicionar-remover-produto/{idProduto}")
+    public ResponseEntity<Void> addProduto(@PathVariable Long idPessoa,
+                                           @PathVariable Long idProduto) {
+        Carrinho carrinho = carrinhoService.findOne(idPessoa);
         Produto produto = produtoService.findById(idProduto);
-        carrinhoService.rmProduto(carrinho, produto);
+        carrinhoService.addRmProduto(carrinho, produto);
         return ResponseEntity.ok().build();
     }
 

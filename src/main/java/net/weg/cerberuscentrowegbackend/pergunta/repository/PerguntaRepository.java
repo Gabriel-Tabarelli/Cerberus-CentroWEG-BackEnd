@@ -1,6 +1,6 @@
-package net.weg.cerberuscentrowegbackend.produto.repository;
+package net.weg.cerberuscentrowegbackend.pergunta.repository;
 
-import net.weg.cerberuscentrowegbackend.produto.model.entity.Pergunta;
+import net.weg.cerberuscentrowegbackend.pergunta.model.entity.Pergunta;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

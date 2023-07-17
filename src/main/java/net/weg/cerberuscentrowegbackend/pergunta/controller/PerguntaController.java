@@ -1,19 +1,17 @@
-package net.weg.cerberuscentrowegbackend.produto.controller;
+package net.weg.cerberuscentrowegbackend.pergunta.controller;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import net.weg.cerberuscentrowegbackend.pessoa.model.entity.Notificacao;
-import net.weg.cerberuscentrowegbackend.pessoa.model.entity.Pessoa;
-import net.weg.cerberuscentrowegbackend.produto.model.dto.PerguntaDto;
-import net.weg.cerberuscentrowegbackend.produto.model.entity.Produto;
-import net.weg.cerberuscentrowegbackend.produto.model.entity.Pergunta;
-import net.weg.cerberuscentrowegbackend.produto.service.ProdutoService;
-import net.weg.cerberuscentrowegbackend.produto.service.PerguntaService;
-import org.springframework.beans.BeanUtils;
+import net.weg.cerberuscentrowegbackend.pergunta.model.dto.PerguntaDto;
+import net.weg.cerberuscentrowegbackend.pergunta.model.dto.PerguntaRetornoDto;
+import net.weg.cerberuscentrowegbackend.pergunta.model.entity.Pergunta;
+import net.weg.cerberuscentrowegbackend.pergunta.service.PerguntaService;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class PerguntaController {
 
     private PerguntaService perguntaService;
+    SimpMessagingTemplate messagingTemplate;
 
     @MessageMapping("/{idProduto}/perguntar") //Chegada da mensagem | Onde enviar a mensagem
     @SendTo("/topic/perguntas") //Envio da mensagem | Onde inscrever-se para receber a mensagem
@@ -28,8 +27,7 @@ public class PerguntaController {
                                  @DestinationVariable Long idProduto) {
         Pergunta pergunta = new Pergunta(perguntaDto, idProduto);
         perguntaService.save(pergunta);
-        System.out.println(new Notificacao(pergunta));
-        return new Notificacao(pergunta);
+        return new Notificacao(new PerguntaRetornoDto(pergunta));
     }
 
 }

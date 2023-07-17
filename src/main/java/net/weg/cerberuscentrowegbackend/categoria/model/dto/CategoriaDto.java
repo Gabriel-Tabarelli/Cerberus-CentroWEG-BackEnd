@@ -14,6 +14,9 @@ public class CategoriaDto {
     @NotNull
     private String nome;
 
+    @NotNull
+    private String urlIcone;
+
     private Categoria categoria;
 
 }

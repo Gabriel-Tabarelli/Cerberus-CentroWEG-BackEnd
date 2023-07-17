@@ -1,21 +1,20 @@
 package net.weg.cerberuscentrowegbackend.pessoa.model.entity;
 
 import lombok.Data;
-import net.weg.cerberuscentrowegbackend.produto.model.entity.Pergunta;
-import net.weg.cerberuscentrowegbackend.produto.model.entity.Resposta;
-
+import net.weg.cerberuscentrowegbackend.pergunta.model.dto.PerguntaRetornoDto;
+import net.weg.cerberuscentrowegbackend.resposta.model.dto.RespostaRetornoDto;
 
 @Data
 public class Notificacao {
 
-    private Pergunta pergunta;
-    private Resposta resposta;
+    private PerguntaRetornoDto pergunta;
+    private RespostaRetornoDto resposta;
 
-    public Notificacao(Pergunta pergunta) {
+    public Notificacao(PerguntaRetornoDto pergunta) {
         this.pergunta = pergunta;
     }
 
-    public Notificacao(Resposta resposta) {
+    public Notificacao(RespostaRetornoDto resposta) {
         this.resposta = resposta;
     }
 
