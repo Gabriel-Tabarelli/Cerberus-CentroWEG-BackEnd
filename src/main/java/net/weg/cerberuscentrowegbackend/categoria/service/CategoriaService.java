@@ -20,11 +20,7 @@ public class CategoriaService {
         repository.save(categoria);
     }
 
-    public void update(Categoria categoria) {
-        repository.save(categoria);
-    }
-
-    public Categoria findOne(Long id) {
+    public Categoria findOne(String id) {
         return repository.findById(id).orElseThrow(
                 ObjetoInexistenteException::new);
     }
@@ -33,12 +29,8 @@ public class CategoriaService {
         return repository.findAll();
     }
 
-    public void delete(Long id) {
-        repository.deleteById(id);
-    }
-
-    public List<?> findCategorias(Long id) {
-        List<Categoria> categorias = repository.findAllByCategoria_Id(id);
+    public List<?> findCategorias(String id) {
+        List<Categoria> categorias = repository.findAllByCategoria_Nome(id);
         if (categorias.isEmpty()) {
             return produtoService.findAllMinimizado(id);
         }

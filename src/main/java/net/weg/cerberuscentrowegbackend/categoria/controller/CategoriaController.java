@@ -28,7 +28,7 @@ public class CategoriaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> findCategorias(@PathVariable Long id) {
+    public ResponseEntity<?> findCategorias(@PathVariable String id) {
         return ResponseEntity.ok(service.findCategorias(id));
     }
 

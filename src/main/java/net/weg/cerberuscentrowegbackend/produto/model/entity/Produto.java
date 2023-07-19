@@ -29,7 +29,7 @@ public class Produto {
     @Column(length = 500)
     private String descricao;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private Categoria categoria;
 
     @OneToMany(cascade = CascadeType.PERSIST)

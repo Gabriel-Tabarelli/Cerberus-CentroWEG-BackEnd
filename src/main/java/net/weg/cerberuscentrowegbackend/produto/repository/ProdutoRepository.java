@@ -19,7 +19,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
     List<ProdutoMinimizadoProjection> findAllBy();
 
-    List<ProdutoMinimizadoProjection> findAllByCategoria_Id(Long categoria_id);
+    List<ProdutoMinimizadoProjection> findAllByCategoria_Nome(String categoria_id);
 
     Page<ProdutoPerguntasProjection> findAllById(Long id, Pageable pageable);
 

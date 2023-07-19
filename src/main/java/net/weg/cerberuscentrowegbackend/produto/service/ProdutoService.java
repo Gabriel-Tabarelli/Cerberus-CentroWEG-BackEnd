@@ -23,8 +23,6 @@ import java.util.List;
 public class ProdutoService {
 
     private ProdutoRepository repository;
-
-    private EspecificacaoProdutoService especificacaoProdutoService;
     private PessoaService pessoaService;
 
     public void save(ProdutoDto produtoDto) {
@@ -56,8 +54,8 @@ public class ProdutoService {
         return repository.findAllBy();
     }
 
-    public List<ProdutoMinimizadoProjection> findAllMinimizado(Long categoriaId) {
-        return repository.findAllByCategoria_Id(categoriaId);
+    public List<ProdutoMinimizadoProjection> findAllMinimizado(String categoriaId) {
+        return repository.findAllByCategoria_Nome(categoriaId);
     }
 
     public void delete(Long id) {

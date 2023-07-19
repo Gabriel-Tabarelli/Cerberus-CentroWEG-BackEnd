@@ -12,16 +12,11 @@ import lombok.NoArgsConstructor;
 public class Categoria {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(nullable = false)
     private String nome;
 
-    @Column(nullable = false)
     private String urlIcone;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Categoria categoria;
 
 }
