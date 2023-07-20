@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @AllArgsConstructor
+@CrossOrigin
 @RequestMapping("/api/pedido")
 public class PedidoController {
 

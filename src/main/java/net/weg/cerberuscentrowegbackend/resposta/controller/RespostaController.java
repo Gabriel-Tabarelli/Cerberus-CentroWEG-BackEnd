@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/api/resposta")
+@CrossOrigin
 public class RespostaController {
 
     private final RespostaService respostaService;

@@ -15,6 +15,7 @@ import java.util.List;
 
 @Controller
 @AllArgsConstructor
+@CrossOrigin
 @RequestMapping("/api/endereco")
 public class EnderecoController {
 

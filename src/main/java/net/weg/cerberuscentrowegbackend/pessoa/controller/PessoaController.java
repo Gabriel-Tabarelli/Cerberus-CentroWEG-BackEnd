@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @AllArgsConstructor
+@CrossOrigin
 @RequestMapping("/api/pessoa")
 public class PessoaController {
 

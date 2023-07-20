@@ -14,6 +14,7 @@ import java.util.List;
 
 @Controller
 @AllArgsConstructor
+@CrossOrigin
 @RequestMapping("/api/categoria")
 public class CategoriaController {
     
