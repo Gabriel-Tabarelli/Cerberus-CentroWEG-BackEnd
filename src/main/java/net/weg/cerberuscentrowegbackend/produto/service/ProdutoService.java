@@ -54,6 +54,10 @@ public class ProdutoService {
         return repository.findAllBy();
     }
 
+    public Page<ProdutoMinimizadoProjection> findAllMinimizado(Pageable pageable) {
+        return repository.findAllBy(pageable);
+    }
+
     public List<ProdutoMinimizadoProjection> findAllMinimizado(String categoriaId) {
         return repository.findAllByCategoria_Nome(categoriaId);
     }

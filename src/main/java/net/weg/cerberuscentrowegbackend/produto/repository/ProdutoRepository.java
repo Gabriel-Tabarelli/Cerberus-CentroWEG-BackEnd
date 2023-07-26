@@ -23,4 +23,6 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
     Page<ProdutoPerguntasProjection> findAllById(Long id, Pageable pageable);
 
+    Page<ProdutoMinimizadoProjection> findAllBy(Pageable pageable);
+
 }

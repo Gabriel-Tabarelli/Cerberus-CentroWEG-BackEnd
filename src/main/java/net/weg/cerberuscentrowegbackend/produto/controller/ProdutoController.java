@@ -44,10 +44,10 @@ public class ProdutoController {
     }
 
     @GetMapping("/get/minimizados")
-    public ResponseEntity<List<ProdutoMinimizadoProjection>> findAllMinimizado() {
-        System.out.println("Minimizadao");
-        return ResponseEntity.ok(service.findAllMinimizado());
-
+    public ResponseEntity<Page<ProdutoMinimizadoProjection>> findAllMinimizado(
+            @RequestParam("page") int page) {
+        Pageable pageable = PageRequest.of(page, 5, Sort.by("nome").descending()); // Implementar retorno com ia
+        return ResponseEntity.ok(service.findAllMinimizado(pageable));
     }
 
     @GetMapping("/{id}/perguntas")
