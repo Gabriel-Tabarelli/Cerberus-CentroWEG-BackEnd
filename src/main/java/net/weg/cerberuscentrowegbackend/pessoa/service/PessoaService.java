@@ -28,6 +28,10 @@ public class PessoaService {
         fisicaRepository.save(pessoa);
     }
 
+    public Pessoa findOneByEmailAndSenha(String email, String senha) {
+        return repository.findByEmailAndSenha(email, senha).orElseThrow(ObjetoInexistenteException::new);
+    }
+
     public Pessoa findOne(Long id) {
         return repository.findById(id).orElseThrow(ObjetoInexistenteException::new);
     }

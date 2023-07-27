@@ -50,9 +50,10 @@ public class PessoaController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Pessoa> findOne(@PathVariable Long id) {
-        return ResponseEntity.ok(service.findOne(id));
+    @GetMapping
+    public ResponseEntity<Pessoa> findOne(@RequestParam("email") String email,
+                                          @RequestParam("senha") String senha) {
+        return ResponseEntity.ok(service.findOneByEmailAndSenha(email, senha));
     }
 
     @PutMapping("/{id}/adicionar-favorito")

@@ -7,6 +7,7 @@ public interface ProdutoMinimizadoProjection {
     Long getId();
     String getNome();
     String getUrlImagem();
+    Categoria getCategoria();
 
     Categoria getCategoria();
 
