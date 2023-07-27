@@ -59,4 +59,11 @@ public class ProdutoController {
         return ResponseEntity.ok(service.findPerguntas(id, pageable));
     }
 
+    @GetMapping("/get/pesquisa/{pesquisa}")
+    public ResponseEntity<List<ProdutoMinimizadoProjection>> findAllByPesquisa(
+            @PathVariable String pesquisa
+    ) {
+        return ResponseEntity.ok(service.findAllByPesquisa(pesquisa));
+    }
+
 }

@@ -9,6 +9,4 @@ public interface ProdutoMinimizadoProjection {
     String getUrlImagem();
     Categoria getCategoria();
 
-    Categoria getCategoria();
-
 }

@@ -14,6 +14,7 @@ import net.weg.cerberuscentrowegbackend.produto.repository.ProdutoRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -68,5 +69,9 @@ public class ProdutoService {
 
     public Page<ProdutoPerguntasProjection> findPerguntas(Long id, Pageable pageable) {
         return repository.findAllById(id, pageable);
+    }
+
+    public List<ProdutoMinimizadoProjection> findAllByPesquisa(String pesquisa) {
+        return repository.findAllByNomeContainingIgnoreCaseOrCategoria_NomeContainingIgnoreCase(pesquisa, pesquisa);
     }
 }

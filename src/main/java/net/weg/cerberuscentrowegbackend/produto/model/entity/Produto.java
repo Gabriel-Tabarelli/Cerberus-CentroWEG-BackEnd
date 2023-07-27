@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import net.weg.cerberuscentrowegbackend.categoria.model.entity.Categoria;
 import net.weg.cerberuscentrowegbackend.pergunta.model.entity.Pergunta;
+import org.hibernate.annotations.Formula;
 
 import java.util.List;
 
