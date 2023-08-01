@@ -8,4 +8,6 @@ public interface ProdutoMinimizadoProjection {
     String getNome();
     String getUrlImagem();
 
+    Categoria getCategoria();
+
 }
