@@ -10,7 +10,6 @@ import net.weg.cerberuscentrowegbackend.pessoa.model.entity.PessoaFisica;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
 public class CarrinhoDto {
 
     private List<Produto> produtos;

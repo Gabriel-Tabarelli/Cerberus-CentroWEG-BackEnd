@@ -19,21 +19,8 @@ public class CarrinhoService {
     }
 
     public Carrinho findOne(Long id) {
-        return carrinhoRepository.findById(id).orElseThrow(
+        return carrinhoRepository.findByPessoa_Id(id).orElseThrow(
                 ObjetoInexistenteException::new);
     }
 
-    public CarrinhoIdProdutosProjection findOneProjection(Long idPessoa) {
-        return carrinhoRepository.findCarrinhoByPessoa_Id(idPessoa).orElseThrow(
-                ObjetoInexistenteException::new);
-    }
-
-    public void addRmProduto(Carrinho carrinho, Produto produto) {
-        if (carrinho.getProdutos().contains(produto)) {
-            carrinho.getProdutos().remove(produto);
-        } else {
-            carrinho.getProdutos().add(produto);
-        }
-        carrinhoRepository.save(carrinho);
-    }
 }

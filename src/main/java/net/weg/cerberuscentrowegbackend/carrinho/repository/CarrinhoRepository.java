@@ -10,8 +10,6 @@ import java.util.Optional;
 @Repository
 public interface CarrinhoRepository extends JpaRepository<Carrinho, Long> {
 
-    Optional<CarrinhoIdProdutosProjection> findCarrinhoByPessoa_Id(Long id);
-
     Optional<Carrinho> findByPessoa_Id(Long id);
 
 }

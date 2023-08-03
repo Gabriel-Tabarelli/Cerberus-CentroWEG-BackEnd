@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import net.weg.cerberuscentrowegbackend.pessoa.model.entity.Pessoa;
 import net.weg.cerberuscentrowegbackend.produto.model.entity.Produto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,10 +20,14 @@ public class Carrinho {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany
+    @ManyToMany
     private List<Produto> produtos;
 
-    @ManyToOne
+    @OneToOne
     private Pessoa pessoa;
+
+    public Carrinho(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
 
 }

@@ -1,6 +1,8 @@
 package net.weg.cerberuscentrowegbackend.pessoa.service;
 
 import lombok.AllArgsConstructor;
+import net.weg.cerberuscentrowegbackend.carrinho.model.entity.Carrinho;
+import net.weg.cerberuscentrowegbackend.carrinho.service.CarrinhoService;
 import net.weg.cerberuscentrowegbackend.exception.ObjetoInexistenteException;
 import net.weg.cerberuscentrowegbackend.pessoa.model.entity.Pessoa;
 import net.weg.cerberuscentrowegbackend.pessoa.model.entity.PessoaFisica;
@@ -9,7 +11,6 @@ import net.weg.cerberuscentrowegbackend.pessoa.repository.PessoaFisicaRepository
 import net.weg.cerberuscentrowegbackend.pessoa.repository.PessoaJuridicaRepository;
 import net.weg.cerberuscentrowegbackend.pessoa.repository.PessoaRepository;
 import net.weg.cerberuscentrowegbackend.produto.model.entity.Produto;
-import net.weg.cerberuscentrowegbackend.produto.service.ProdutoService;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,13 +20,18 @@ public class PessoaService {
     private PessoaRepository repository;
     private PessoaJuridicaRepository juridicaRepository;
     private PessoaFisicaRepository fisicaRepository;
+    private CarrinhoService carrinhoService;
 
     public void save(PessoaJuridica pessoa) {
         juridicaRepository.save(pessoa);
+        Carrinho carrinho = new Carrinho(pessoa);
+        carrinhoService.save(carrinho);
     }
 
     public void save(PessoaFisica pessoa) {
         fisicaRepository.save(pessoa);
+        Carrinho carrinho = new Carrinho(pessoa);
+        carrinhoService.save(carrinho);
     }
 
     public Pessoa findOneByEmailAndSenha(String email, String senha) {

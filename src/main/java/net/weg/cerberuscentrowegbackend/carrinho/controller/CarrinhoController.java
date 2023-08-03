@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.*;
 public class CarrinhoController {
 
     private CarrinhoService carrinhoService;
-    private ProdutoService produtoService;
 
     @PostMapping
     public ResponseEntity<Void> save(@RequestBody @Valid CarrinhoDto carrinhoDto) {
@@ -31,16 +30,13 @@ public class CarrinhoController {
     }
 
     @GetMapping("/{idPessoa}")
-    public ResponseEntity<CarrinhoIdProdutosProjection> findOne(@PathVariable Long idPessoa) {
-        return ResponseEntity.ok(carrinhoService.findOneProjection(idPessoa));
+    public ResponseEntity<Carrinho> findOne(@PathVariable Long idPessoa) {
+        return ResponseEntity.ok(carrinhoService.findOne(idPessoa));
     }
 
-    @PutMapping("/{idPessoa}/adicionar-remover-produto/{idProduto}")
-    public ResponseEntity<Void> addProduto(@PathVariable Long idPessoa,
-                                           @PathVariable Long idProduto) {
-        Carrinho carrinho = carrinhoService.findOne(idPessoa);
-        Produto produto = produtoService.findById(idProduto);
-        carrinhoService.addRmProduto(carrinho, produto);
+    @PutMapping
+    public ResponseEntity<Void> addProduto(@RequestBody Carrinho carrinho) {
+        carrinhoService.save(carrinho);
         return ResponseEntity.ok().build();
     }
 
