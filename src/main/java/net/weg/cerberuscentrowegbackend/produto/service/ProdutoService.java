@@ -30,10 +30,12 @@ public class ProdutoService {
         Produto produto = new Produto();
         BeanUtils.copyProperties(produtoDto, produto);
         produtoDto.getPerguntas().forEach(pergunta -> {
-            pergunta.getListaRespostas().forEach(resposta -> {
-                Pessoa pessoa = pessoaService.findOne(resposta.getPessoa().getId());
-                resposta.setPessoa(pessoa);
-            });
+            if (pergunta.getListaRespostas() != null) {
+                pergunta.getListaRespostas().forEach(resposta -> {
+                    Pessoa pessoa = pessoaService.findOne(resposta.getPessoa().getId());
+                    resposta.setPessoa(pessoa);
+                });
+            }
             Pessoa pessoa = pessoaService.findOne(pergunta.getPessoa().getId());
             pergunta.setPessoa(pessoa);
             pergunta.setProduto(produto);

@@ -18,7 +18,7 @@ public class Resposta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Pessoa pessoa;
 
     @Column(nullable = false)
