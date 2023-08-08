@@ -11,9 +11,13 @@ public class PerguntaRetornoDto {
     @JsonProperty("pergunta")
     private final String pergunta;
 
+    @JsonProperty("produtoId")
+    private final Long produtoId;
+
     public PerguntaRetornoDto(Pergunta pergunta) {
         this.id = pergunta.getId();
         this.pergunta = pergunta.getPergunta();
+        this.produtoId = pergunta.getProduto().getId();
     }
 
 }

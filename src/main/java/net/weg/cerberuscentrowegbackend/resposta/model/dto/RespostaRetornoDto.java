@@ -10,7 +10,6 @@ public class RespostaRetornoDto {
     private final Long id;
 
     @JsonProperty("resposta")
-
     private final String resposta;
 
     @JsonProperty("pergunta")

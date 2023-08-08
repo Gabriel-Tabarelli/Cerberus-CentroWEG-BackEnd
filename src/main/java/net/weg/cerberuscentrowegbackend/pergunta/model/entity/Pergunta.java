@@ -30,7 +30,7 @@ public class Pergunta {
     @JsonIgnore
     private Produto produto;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     @JoinColumn(name = "pergunta_id")
     private List<Resposta> listaRespostas;
 

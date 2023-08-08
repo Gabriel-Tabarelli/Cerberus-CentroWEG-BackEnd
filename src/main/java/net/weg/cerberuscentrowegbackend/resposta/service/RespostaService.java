@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class RespostaService {
 
-    private final RespostaRepository respostaRepository;
+    private final RespostaRepository repository;
 
     public void save(Resposta resposta) {
-        respostaRepository.save(resposta);
+        repository.save(resposta);
     }
 
 }
