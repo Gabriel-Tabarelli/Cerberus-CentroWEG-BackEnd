@@ -2,6 +2,7 @@ package net.weg.cerberuscentrowegbackend.produto.controller;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import net.weg.cerberuscentrowegbackend.pergunta.model.projection.PerguntaProjection;
 import net.weg.cerberuscentrowegbackend.produto.model.dto.ProdutoDto;
 import net.weg.cerberuscentrowegbackend.produto.model.projection.ProdutoMinimizadoProjection;
 import net.weg.cerberuscentrowegbackend.produto.model.projection.ProdutoPerguntasProjection;
@@ -51,11 +52,12 @@ public class ProdutoController {
     }
 
     @GetMapping("/{id}/perguntas")
-    public ResponseEntity<Page<ProdutoPerguntasProjection>> findPerguntas(
+    public ResponseEntity<Page<PerguntaProjection>> findPerguntas(
             @PathVariable Long id,
             @RequestParam("page") int page
     ) {
-        Pageable pageable = PageRequest.of(page, 3, Sort.by("nome").descending());
+        Pageable pageable = PageRequest.of(page, 3, Sort.by("id").descending());
+        System.out.print("Testando pageable");
         return ResponseEntity.ok(service.findPerguntas(id, pageable));
     }
 
