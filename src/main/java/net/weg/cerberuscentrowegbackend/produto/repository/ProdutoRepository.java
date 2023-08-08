@@ -21,8 +21,6 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
     List<ProdutoMinimizadoProjection> findAllByCategoria_Nome(String categoria_id);
 
-    Page<ProdutoPerguntasProjection> findAllById(Long id, Pageable pageable);
-
     Page<ProdutoMinimizadoProjection> findAllBy(Pageable pageable);
 
     List<ProdutoMinimizadoProjection> findAllByNomeContainingIgnoreCaseOrCategoria_NomeContainingIgnoreCase(String nome, String categoria_nome);

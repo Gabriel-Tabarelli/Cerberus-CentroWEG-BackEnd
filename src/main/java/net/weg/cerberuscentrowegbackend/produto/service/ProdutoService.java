@@ -2,6 +2,8 @@ package net.weg.cerberuscentrowegbackend.produto.service;
 
 import lombok.AllArgsConstructor;
 import net.weg.cerberuscentrowegbackend.exception.ObjetoInexistenteException;
+import net.weg.cerberuscentrowegbackend.pergunta.model.projection.PerguntaProjection;
+import net.weg.cerberuscentrowegbackend.pergunta.repository.PerguntaRepository;
 import net.weg.cerberuscentrowegbackend.pessoa.model.entity.Pessoa;
 import net.weg.cerberuscentrowegbackend.pessoa.service.PessoaService;
 import net.weg.cerberuscentrowegbackend.produto.model.dto.ProdutoDto;
@@ -25,6 +27,7 @@ public class ProdutoService {
 
     private ProdutoRepository repository;
     private PessoaService pessoaService;
+    private PerguntaRepository perguntaRepository;
 
     public void save(ProdutoDto produtoDto) {
         Produto produto = new Produto();
@@ -69,8 +72,8 @@ public class ProdutoService {
         repository.deleteById(id);
     }
 
-    public Page<ProdutoPerguntasProjection> findPerguntas(Long id, Pageable pageable) {
-        return repository.findAllById(id, pageable);
+    public Page<PerguntaProjection> findPerguntas(Long id, Pageable pageable) {
+        return perguntaRepository.findAllByProduto_Id(id, pageable);
     }
 
     public List<ProdutoMinimizadoProjection> findAllByPesquisa(String pesquisa) {
