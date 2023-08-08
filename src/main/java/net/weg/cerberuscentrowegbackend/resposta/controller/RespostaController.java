@@ -19,12 +19,12 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @AllArgsConstructor
 @CrossOrigin
-@Transactional
 public class RespostaController {
 
     private final RespostaService service;
     private final PerguntaService perguntaService;
 
+    @Transactional
     @MessageMapping("/{idPergunta}/responder/{idPessoa}") //Chegada da mensagem | Onde enviar a mensagem || ADMIN
     @SendTo("/topic/{idPessoa}") //Envio da mensagem | Onde inscrever-se para receber a mensagem || ADMIN USUARIO
     public RespostaRetornoDto perguntar(
@@ -33,6 +33,7 @@ public class RespostaController {
             @DestinationVariable Long idPessoa
     ) {
         Resposta resposta = new Resposta(respostaDto, idPergunta);
+        resposta.setPergunta(perguntaService.getOne(idPergunta));
         service.save(resposta);
         return new RespostaRetornoDto(resposta);
     }
