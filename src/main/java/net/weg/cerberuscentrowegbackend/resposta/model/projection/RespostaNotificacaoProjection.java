@@ -2,7 +2,7 @@ package net.weg.cerberuscentrowegbackend.resposta.model.projection;
 
 import net.weg.cerberuscentrowegbackend.pessoa.model.projection.PessoaNomeProjection;
 
-public interface RespostaProjection {
+public interface RespostaNotificacaoProjection {
 
     Long getId();
 

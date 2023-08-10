@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.weg.cerberuscentrowegbackend.notificacao.model.Notificacao;
 import net.weg.cerberuscentrowegbackend.pessoa.model.entity.Pessoa;
 import net.weg.cerberuscentrowegbackend.pergunta.model.dto.PerguntaDto;
 import net.weg.cerberuscentrowegbackend.produto.model.entity.Produto;
@@ -23,7 +24,7 @@ public class Pergunta {
     private Long id;
 
     @ManyToOne
-    private Pessoa pessoa;
+    private Pessoa perguntador;
 
     @ManyToOne
     @JoinColumn(name = "produto_id")
@@ -39,7 +40,7 @@ public class Pergunta {
 
     public Pergunta(PerguntaDto perguntaDto, Long idProduto) {
         this.pergunta = perguntaDto.getPergunta();
-        this.pessoa = new Pessoa(perguntaDto.getIdPessoa());
+        this.perguntador = new Pessoa(perguntaDto.getIdPessoa());
         this.produto = new Produto(idProduto);
     }
 

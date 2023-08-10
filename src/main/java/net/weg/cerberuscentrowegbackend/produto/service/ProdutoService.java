@@ -7,16 +7,13 @@ import net.weg.cerberuscentrowegbackend.pergunta.repository.PerguntaRepository;
 import net.weg.cerberuscentrowegbackend.pessoa.model.entity.Pessoa;
 import net.weg.cerberuscentrowegbackend.pessoa.service.PessoaService;
 import net.weg.cerberuscentrowegbackend.produto.model.dto.ProdutoDto;
-import net.weg.cerberuscentrowegbackend.produto.model.entity.EspecificacaoProduto;
 import net.weg.cerberuscentrowegbackend.produto.model.entity.Produto;
 import net.weg.cerberuscentrowegbackend.produto.model.projection.ProdutoMinimizadoProjection;
-import net.weg.cerberuscentrowegbackend.produto.model.projection.ProdutoPerguntasProjection;
 import net.weg.cerberuscentrowegbackend.produto.model.projection.ProdutoSemPerguntasProjection;
 import net.weg.cerberuscentrowegbackend.produto.repository.ProdutoRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,12 +32,12 @@ public class ProdutoService {
         produtoDto.getPerguntas().forEach(pergunta -> {
             if (pergunta.getListaRespostas() != null) {
                 pergunta.getListaRespostas().forEach(resposta -> {
-                    Pessoa pessoa = pessoaService.findOne(resposta.getPessoa().getId());
-                    resposta.setPessoa(pessoa);
+                    Pessoa pessoa = pessoaService.findOne(resposta.getRespondedor().getId());
+                    resposta.setRespondedor(pessoa);
                 });
             }
-            Pessoa pessoa = pessoaService.findOne(pergunta.getPessoa().getId());
-            pergunta.setPessoa(pessoa);
+            Pessoa pessoa = pessoaService.findOne(pergunta.getPerguntador().getId());
+            pergunta.setPerguntador(pessoa);
             pergunta.setProduto(produto);
         });
         repository.save(produto);

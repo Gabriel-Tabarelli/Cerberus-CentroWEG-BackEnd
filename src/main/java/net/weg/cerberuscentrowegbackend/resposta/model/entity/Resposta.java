@@ -19,7 +19,7 @@ public class Resposta {
     private Long id;
 
     @ManyToOne
-    private Pessoa pessoa;
+    private Pessoa respondedor;
 
     @Column(nullable = false)
     private String resposta;
@@ -29,7 +29,7 @@ public class Resposta {
 
     public Resposta(RespostaDto respostaDto, Long idPergunta) {
         this.resposta = respostaDto.getResposta();
-        this.pessoa = new Pessoa(respostaDto.getIdPessoa());
+        this.respondedor = new Pessoa(respostaDto.getIdPessoa());
         this.pergunta = new Pergunta(idPergunta);
     }
 
