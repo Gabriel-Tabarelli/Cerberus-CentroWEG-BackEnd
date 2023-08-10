@@ -14,10 +14,14 @@ public class PerguntaRetornoDto {
     @JsonProperty("produtoId")
     private final Long produtoId;
 
+    @JsonProperty("data")
+    private final String data;
+
     public PerguntaRetornoDto(Pergunta pergunta) {
         this.id = pergunta.getId();
         this.pergunta = pergunta.getPergunta();
         this.produtoId = pergunta.getProduto().getId();
+        this.data = pergunta.getData();
     }
 
 }
