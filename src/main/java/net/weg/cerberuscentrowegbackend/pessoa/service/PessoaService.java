@@ -3,10 +3,12 @@ package net.weg.cerberuscentrowegbackend.pessoa.service;
 import lombok.AllArgsConstructor;
 import net.weg.cerberuscentrowegbackend.carrinho.model.entity.Carrinho;
 import net.weg.cerberuscentrowegbackend.carrinho.service.CarrinhoService;
+import net.weg.cerberuscentrowegbackend.endereco.model.entity.Endereco;
 import net.weg.cerberuscentrowegbackend.exception.ObjetoInexistenteException;
 import net.weg.cerberuscentrowegbackend.pessoa.model.entity.Pessoa;
 import net.weg.cerberuscentrowegbackend.pessoa.model.entity.PessoaFisica;
 import net.weg.cerberuscentrowegbackend.pessoa.model.entity.PessoaJuridica;
+import net.weg.cerberuscentrowegbackend.pessoa.model.projection.PessoaEnderecoProjection;
 import net.weg.cerberuscentrowegbackend.pessoa.repository.PessoaFisicaRepository;
 import net.weg.cerberuscentrowegbackend.pessoa.repository.PessoaJuridicaRepository;
 import net.weg.cerberuscentrowegbackend.pessoa.repository.PessoaRepository;
@@ -63,4 +65,10 @@ public class PessoaService {
         pessoa.getFavoritos().remove(produto);
         update(pessoa);
     }
+
+    public PessoaEnderecoProjection buscarEndereco(Long id){
+        return repository.findPessoaById(id);
+    }
+
+
 }

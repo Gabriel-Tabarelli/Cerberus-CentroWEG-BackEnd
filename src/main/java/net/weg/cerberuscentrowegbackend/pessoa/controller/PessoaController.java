@@ -2,11 +2,14 @@ package net.weg.cerberuscentrowegbackend.pessoa.controller;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import net.weg.cerberuscentrowegbackend.endereco.model.entity.Endereco;
+import net.weg.cerberuscentrowegbackend.endereco.projection.EnderecoProjection;
 import net.weg.cerberuscentrowegbackend.pessoa.model.dto.PessoaFisicaDto;
 import net.weg.cerberuscentrowegbackend.pessoa.model.dto.PessoaJuridicaDto;
 import net.weg.cerberuscentrowegbackend.pessoa.model.entity.Pessoa;
 import net.weg.cerberuscentrowegbackend.pessoa.model.entity.PessoaFisica;
 import net.weg.cerberuscentrowegbackend.pessoa.model.entity.PessoaJuridica;
+import net.weg.cerberuscentrowegbackend.pessoa.model.projection.PessoaEnderecoProjection;
 import net.weg.cerberuscentrowegbackend.pessoa.service.PessoaService;
 import net.weg.cerberuscentrowegbackend.produto.model.entity.Produto;
 import org.springframework.beans.BeanUtils;
@@ -68,6 +71,11 @@ public class PessoaController {
         Pessoa pessoa = service.findOne(id);
         service.removerFavorito(pessoa, produto);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("endereco/{id}")
+    public ResponseEntity<PessoaEnderecoProjection> buscarEndereco(@PathVariable Long id) {
+        return ResponseEntity.ok(service.buscarEndereco(id));
     }
 
 }

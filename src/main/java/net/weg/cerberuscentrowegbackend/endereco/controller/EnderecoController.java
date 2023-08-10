@@ -5,6 +5,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import net.weg.cerberuscentrowegbackend.endereco.model.dto.EnderecoDto;
 import net.weg.cerberuscentrowegbackend.endereco.model.entity.Endereco;
+import net.weg.cerberuscentrowegbackend.endereco.projection.EnderecoProjection;
 import net.weg.cerberuscentrowegbackend.endereco.service.EnderecoService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.ResponseEntity;
@@ -45,5 +46,11 @@ public class EnderecoController {
     public ResponseEntity<Endereco> findOne(@PathVariable Long id) {
         return ResponseEntity.ok(enderecoService.findOne(id));
     }
+
+
+//    @GetMapping("/endereco/{id}")
+//    public ResponseEntity<EnderecoProjection> buscarEndereco(@PathVariable Long id) {
+//        return ResponseEntity.ok(enderecoService.buscaEndereco(id));
+//    }
 
 }

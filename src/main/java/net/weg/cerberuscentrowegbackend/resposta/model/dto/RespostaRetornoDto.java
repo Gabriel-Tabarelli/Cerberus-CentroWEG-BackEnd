@@ -15,10 +15,14 @@ public class RespostaRetornoDto {
     @JsonProperty("pergunta")
     private final PerguntaRetornoDto pergunta;
 
+    @JsonProperty("data")
+    private final String data;
+
     public RespostaRetornoDto(Resposta resposta) {
         this.id = resposta.getId();
         this.resposta = resposta.getResposta();
         this.pergunta = new PerguntaRetornoDto(resposta.getPergunta());
+        this.data = resposta.getData();
     }
 
 }

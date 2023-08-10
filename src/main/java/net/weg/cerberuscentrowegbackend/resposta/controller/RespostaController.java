@@ -16,6 +16,9 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 @Controller
 @AllArgsConstructor
 @CrossOrigin
@@ -32,7 +35,12 @@ public class RespostaController {
             @DestinationVariable Long idPergunta,
             @DestinationVariable Long idPessoa
     ) {
-        Resposta resposta = new Resposta(respostaDto, idPergunta);
+
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String formattedDate = currentDate.format(formatter);
+        Resposta resposta = new Resposta(respostaDto, idPergunta, formattedDate);
+
         resposta.setPergunta(perguntaService.getOne(idPergunta));
         service.save(resposta);
         return new RespostaRetornoDto(resposta);

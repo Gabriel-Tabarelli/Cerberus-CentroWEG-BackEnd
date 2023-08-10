@@ -10,4 +10,6 @@ public interface RespostaProjection {
 
     PessoaNomeProjection getPessoa();
 
+    String getData();
+
 }
