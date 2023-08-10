@@ -30,4 +30,6 @@ public class PessoaJuridicaDto {
     @NotNull
     private String telefone;
 
+    private Boolean admin;
+
 }

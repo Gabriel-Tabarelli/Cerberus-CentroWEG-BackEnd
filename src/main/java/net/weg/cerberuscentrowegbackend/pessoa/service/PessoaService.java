@@ -7,11 +7,14 @@ import net.weg.cerberuscentrowegbackend.exception.ObjetoInexistenteException;
 import net.weg.cerberuscentrowegbackend.pessoa.model.entity.Pessoa;
 import net.weg.cerberuscentrowegbackend.pessoa.model.entity.PessoaFisica;
 import net.weg.cerberuscentrowegbackend.pessoa.model.entity.PessoaJuridica;
+import net.weg.cerberuscentrowegbackend.pessoa.model.projection.PessoaNotificacoesProjection;
 import net.weg.cerberuscentrowegbackend.pessoa.repository.PessoaFisicaRepository;
 import net.weg.cerberuscentrowegbackend.pessoa.repository.PessoaJuridicaRepository;
 import net.weg.cerberuscentrowegbackend.pessoa.repository.PessoaRepository;
 import net.weg.cerberuscentrowegbackend.produto.model.entity.Produto;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -63,4 +66,13 @@ public class PessoaService {
         pessoa.getFavoritos().remove(produto);
         update(pessoa);
     }
+
+    public List<Pessoa> pegarAdmins() {
+        return repository.findAllByAdmin(true);
+    }
+
+    public PessoaNotificacoesProjection buscarNotificacoes(Long id) {
+        return repository.findPessoaById(id);
+    }
+
 }

@@ -30,4 +30,5 @@ public class PessoaFisicaDto {
     @NotNull
     private String telefone;
 
+    private Boolean admin;
 }

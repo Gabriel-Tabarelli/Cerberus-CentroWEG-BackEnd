@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import net.weg.cerberuscentrowegbackend.endereco.model.entity.Endereco;
-import net.weg.cerberuscentrowegbackend.notificacao.model.Notificacao;
+import net.weg.cerberuscentrowegbackend.notificacao.model.entity.Notificacao;
 import net.weg.cerberuscentrowegbackend.produto.model.entity.Produto;
 
 import java.util.List;
@@ -18,7 +18,7 @@ import java.util.List;
 public class Pessoa {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -41,8 +41,10 @@ public class Pessoa {
     @ManyToMany
     private List<Produto> favoritos;
 
-    @OneToMany
+    @ManyToMany
     private List<Notificacao> notificacoes;
+
+    private Boolean admin;
 
     public Pessoa(Long id) {
         this.id = id;

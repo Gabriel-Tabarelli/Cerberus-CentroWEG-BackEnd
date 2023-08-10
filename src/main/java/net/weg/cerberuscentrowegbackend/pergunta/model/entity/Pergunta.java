@@ -5,13 +5,11 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import net.weg.cerberuscentrowegbackend.notificacao.model.Notificacao;
 import net.weg.cerberuscentrowegbackend.pessoa.model.entity.Pessoa;
 import net.weg.cerberuscentrowegbackend.pergunta.model.dto.PerguntaDto;
 import net.weg.cerberuscentrowegbackend.produto.model.entity.Produto;
 import net.weg.cerberuscentrowegbackend.resposta.model.entity.Resposta;
 
-import java.util.Date;
 import java.util.List;
 
 @Entity

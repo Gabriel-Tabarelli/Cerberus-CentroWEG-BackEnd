@@ -7,6 +7,7 @@ import net.weg.cerberuscentrowegbackend.pessoa.model.dto.PessoaJuridicaDto;
 import net.weg.cerberuscentrowegbackend.pessoa.model.entity.Pessoa;
 import net.weg.cerberuscentrowegbackend.pessoa.model.entity.PessoaFisica;
 import net.weg.cerberuscentrowegbackend.pessoa.model.entity.PessoaJuridica;
+import net.weg.cerberuscentrowegbackend.pessoa.model.projection.PessoaNotificacoesProjection;
 import net.weg.cerberuscentrowegbackend.pessoa.service.PessoaService;
 import net.weg.cerberuscentrowegbackend.produto.model.entity.Produto;
 import org.springframework.beans.BeanUtils;
@@ -68,6 +69,11 @@ public class PessoaController {
         Pessoa pessoa = service.findOne(id);
         service.removerFavorito(pessoa, produto);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/{id}/notificacoes")
+    public ResponseEntity<PessoaNotificacoesProjection> buscarNotificacoes(@PathVariable Long id) {
+        return ResponseEntity.ok(service.buscarNotificacoes(id));
     }
 
 }

@@ -1,4 +1,4 @@
-package net.weg.cerberuscentrowegbackend.notificacao.model;
+package net.weg.cerberuscentrowegbackend.notificacao.model.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -25,11 +25,13 @@ public class Notificacao {
 
     public Notificacao(Pergunta pergunta) {
         this.pergunta = pergunta;
+        this.reposta = null;
         visualizada = false;
     }
 
     public Notificacao(Resposta resposta) {
         this.reposta = resposta;
+        this.pergunta = null;
         visualizada = false;
     }
 

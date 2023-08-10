@@ -13,7 +13,7 @@ public interface PerguntaProjection {
 
     String getPergunta();
 
-    PessoaNomeProjection getPessoa();
+    PessoaNomeProjection getPerguntador();
 
     String getData();
 

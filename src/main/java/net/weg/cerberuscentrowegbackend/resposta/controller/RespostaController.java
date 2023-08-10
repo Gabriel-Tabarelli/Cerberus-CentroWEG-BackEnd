@@ -3,10 +3,13 @@ package net.weg.cerberuscentrowegbackend.resposta.controller;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import net.weg.cerberuscentrowegbackend.pergunta.controller.PerguntaController;
+import net.weg.cerberuscentrowegbackend.notificacao.model.entity.Notificacao;
+import net.weg.cerberuscentrowegbackend.notificacao.model.projection.NotificacaoProjection;
+import net.weg.cerberuscentrowegbackend.notificacao.service.NotificacaoService;
 import net.weg.cerberuscentrowegbackend.pergunta.service.PerguntaService;
+import net.weg.cerberuscentrowegbackend.pessoa.model.entity.Pessoa;
+import net.weg.cerberuscentrowegbackend.pessoa.service.PessoaService;
 import net.weg.cerberuscentrowegbackend.resposta.model.dto.RespostaDto;
-import net.weg.cerberuscentrowegbackend.resposta.model.dto.RespostaRetornoDto;
 import net.weg.cerberuscentrowegbackend.resposta.model.entity.Resposta;
 import net.weg.cerberuscentrowegbackend.resposta.service.RespostaService;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
@@ -23,19 +26,26 @@ public class RespostaController {
 
     private final RespostaService service;
     private final PerguntaService perguntaService;
+    private final PessoaService pessoaService;
+    private final NotificacaoService notificacaoService;
 
     @Transactional
     @MessageMapping("/{idPergunta}/responder/{idPessoa}") //Chegada da mensagem | Onde enviar a mensagem || ADMIN
     @SendTo("/topic/{idPessoa}") //Envio da mensagem | Onde inscrever-se para receber a mensagem || ADMIN USUARIO
-    public RespostaRetornoDto perguntar(
+    public NotificacaoProjection perguntar(
             @Valid @Payload RespostaDto respostaDto,
             @DestinationVariable Long idPergunta,
             @DestinationVariable Long idPessoa
     ) {
         Resposta resposta = new Resposta(respostaDto, idPergunta);
         resposta.setPergunta(perguntaService.getOne(idPergunta));
+        Notificacao notificacao = new Notificacao(resposta);
         service.save(resposta);
-        return new RespostaRetornoDto(resposta);
+        Pessoa pessoa = pessoaService.findOne(idPessoa);
+        pessoa.getNotificacoes().add(notificacao);
+        NotificacaoProjection notificacaoProjection = notificacaoService.salvar(notificacao);
+        pessoaService.update(pessoa);
+        return notificacaoProjection;
     }
 
 }
