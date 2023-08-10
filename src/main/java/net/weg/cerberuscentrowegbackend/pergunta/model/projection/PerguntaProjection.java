@@ -15,4 +15,6 @@ public interface PerguntaProjection {
 
     PessoaNomeProjection getPessoa();
 
+    String getData();
+
 }

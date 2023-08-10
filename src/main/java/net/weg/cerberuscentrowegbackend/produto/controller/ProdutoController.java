@@ -57,7 +57,6 @@ public class ProdutoController {
             @RequestParam("page") int page
     ) {
         Pageable pageable = PageRequest.of(page, 3, Sort.by("id").descending());
-        System.out.print("Testando pageable");
         return ResponseEntity.ok(service.findPerguntas(id, pageable));
     }
 

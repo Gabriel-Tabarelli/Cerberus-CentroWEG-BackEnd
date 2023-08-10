@@ -10,6 +10,7 @@ import net.weg.cerberuscentrowegbackend.pergunta.model.dto.PerguntaDto;
 import net.weg.cerberuscentrowegbackend.produto.model.entity.Produto;
 import net.weg.cerberuscentrowegbackend.resposta.model.entity.Resposta;
 
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -37,10 +38,13 @@ public class Pergunta {
     @Column(nullable = false)
     private String pergunta;
 
-    public Pergunta(PerguntaDto perguntaDto, Long idProduto) {
+    private String data;
+
+    public Pergunta(PerguntaDto perguntaDto, Long idProduto, String data) {
         this.pergunta = perguntaDto.getPergunta();
         this.pessoa = new Pessoa(perguntaDto.getIdPessoa());
         this.produto = new Produto(idProduto);
+        this.data = data;
     }
 
     public Pergunta(Long id) {
