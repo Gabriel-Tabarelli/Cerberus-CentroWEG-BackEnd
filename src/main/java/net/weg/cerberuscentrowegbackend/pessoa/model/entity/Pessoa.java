@@ -1,5 +1,6 @@
 package net.weg.cerberuscentrowegbackend.pessoa.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -42,6 +43,7 @@ public class Pessoa {
     private List<Produto> favoritos;
 
     @ManyToMany
+    @JsonIgnore
     private List<Notificacao> notificacoes;
 
     private Boolean admin;

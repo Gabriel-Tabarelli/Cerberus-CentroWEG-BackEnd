@@ -19,18 +19,18 @@ public class Notificacao {
     private Pergunta pergunta;
 
     @OneToOne
-    private Resposta reposta;
+    private Resposta resposta;
 
     private Boolean visualizada;
 
     public Notificacao(Pergunta pergunta) {
         this.pergunta = pergunta;
-        this.reposta = null;
+        this.resposta = null;
         visualizada = false;
     }
 
     public Notificacao(Resposta resposta) {
-        this.reposta = resposta;
+        this.resposta = resposta;
         this.pergunta = null;
         visualizada = false;
     }

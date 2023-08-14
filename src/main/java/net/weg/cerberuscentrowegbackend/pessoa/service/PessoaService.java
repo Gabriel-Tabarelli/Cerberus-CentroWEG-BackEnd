@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import net.weg.cerberuscentrowegbackend.carrinho.model.entity.Carrinho;
 import net.weg.cerberuscentrowegbackend.carrinho.service.CarrinhoService;
 import net.weg.cerberuscentrowegbackend.exception.ObjetoInexistenteException;
+import net.weg.cerberuscentrowegbackend.notificacao.service.NotificacaoService;
 import net.weg.cerberuscentrowegbackend.pessoa.model.entity.Pessoa;
 import net.weg.cerberuscentrowegbackend.pessoa.model.entity.PessoaFisica;
 import net.weg.cerberuscentrowegbackend.pessoa.model.entity.PessoaJuridica;
@@ -21,10 +22,11 @@ import java.util.List;
 @AllArgsConstructor
 public class PessoaService {
 
-    private PessoaRepository repository;
-    private PessoaJuridicaRepository juridicaRepository;
-    private PessoaFisicaRepository fisicaRepository;
-    private CarrinhoService carrinhoService;
+    private final PessoaRepository repository;
+    private final PessoaJuridicaRepository juridicaRepository;
+    private final PessoaFisicaRepository fisicaRepository;
+    private final CarrinhoService carrinhoService;
+    private final NotificacaoService notificacaoService;
 
     public void save(PessoaJuridica pessoa) {
         juridicaRepository.save(pessoa);
@@ -54,15 +56,6 @@ public class PessoaService {
         repository.save(pessoa);
     }
 
-    public void adicionarFavorito(Pessoa pessoa, Produto produto) {
-        if (pessoa.getFavoritos().contains(produto)) {
-            throw new RuntimeException("Produto já está na lista de favoritos");
-        } else {
-            pessoa.getFavoritos().add(produto);
-            update(pessoa);
-        }
-    }
-
     public void removerFavorito(Pessoa pessoa, Produto produto) {
         pessoa.getFavoritos().remove(produto);
         update(pessoa);
@@ -80,4 +73,8 @@ public class PessoaService {
         return repository.findPessoaById(id);
     }
 
+    public void visualizarComentario(Long idNotificacao) {
+        notificacaoService.visualizarNotificacao(idNotificacao);
+
+    }
 }

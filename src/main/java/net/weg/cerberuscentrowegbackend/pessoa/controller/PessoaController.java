@@ -58,13 +58,6 @@ public class PessoaController {
         return ResponseEntity.ok(service.findOneByEmailAndSenha(email, senha));
     }
 
-    @PutMapping("/{id}/adicionar-favorito")
-    public ResponseEntity<Void> adicionarFavorito(@PathVariable Long id, @RequestBody Produto produto) {
-        Pessoa pessoa = service.findOne(id);
-        service.adicionarFavorito(pessoa, produto);
-        return ResponseEntity.ok().build();
-    }
-
     @PutMapping("/{id}/remover-favorito")
     public ResponseEntity<Void> removerFavorito(@PathVariable Long id, @RequestBody Produto produto) {
         Pessoa pessoa = service.findOne(id);
@@ -80,6 +73,12 @@ public class PessoaController {
     @GetMapping("endereco/{id}")
     public ResponseEntity<PessoaEnderecoProjection> buscarEndereco(@PathVariable Long id) {
         return ResponseEntity.ok(service.buscarEndereco(id));
+    }
+
+    @PutMapping("/visualizar-comentario")
+    public ResponseEntity<Void> visualizarComentario(@RequestBody Long idNotificacao) {
+        service.visualizarComentario(idNotificacao);
+        return ResponseEntity.ok().build();
     }
 
 }

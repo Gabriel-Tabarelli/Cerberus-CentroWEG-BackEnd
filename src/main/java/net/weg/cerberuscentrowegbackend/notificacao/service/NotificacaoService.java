@@ -17,4 +17,10 @@ public class NotificacaoService {
         return repository.findNotificacaoById(id);
     }
 
+    public void visualizarNotificacao(Long id) {
+        Notificacao notificacao = repository.findById(id).orElseThrow();
+        notificacao.setVisualizada(true);
+        repository.save(notificacao);
+    }
+
 }
