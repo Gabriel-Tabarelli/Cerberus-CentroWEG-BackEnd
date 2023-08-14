@@ -31,7 +31,7 @@ public class Pessoa {
     @Column(nullable = false)
     private String senha;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private Endereco endereco;
 
     @Column(nullable = false)

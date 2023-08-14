@@ -8,6 +8,7 @@ import net.weg.cerberuscentrowegbackend.pessoa.model.entity.Pessoa;
 import net.weg.cerberuscentrowegbackend.pessoa.model.entity.PessoaFisica;
 import net.weg.cerberuscentrowegbackend.pessoa.model.entity.PessoaJuridica;
 import net.weg.cerberuscentrowegbackend.pessoa.model.projection.PessoaNotificacoesProjection;
+import net.weg.cerberuscentrowegbackend.pessoa.model.projection.PessoaEnderecoProjection;
 import net.weg.cerberuscentrowegbackend.pessoa.service.PessoaService;
 import net.weg.cerberuscentrowegbackend.produto.model.entity.Produto;
 import org.springframework.beans.BeanUtils;
@@ -21,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/pessoa")
 public class PessoaController {
 
-    private PessoaService service;
+    private final PessoaService service;
 
     @PostMapping("/pessoa-juridica")
     public ResponseEntity<Void> save(@RequestBody @Valid PessoaJuridicaDto pessoaJuridicaDto) {
@@ -74,6 +75,11 @@ public class PessoaController {
     @GetMapping("/{id}/notificacoes")
     public ResponseEntity<PessoaNotificacoesProjection> buscarNotificacoes(@PathVariable Long id) {
         return ResponseEntity.ok(service.buscarNotificacoes(id));
+    }
+
+    @GetMapping("endereco/{id}")
+    public ResponseEntity<PessoaEnderecoProjection> buscarEndereco(@PathVariable Long id) {
+        return ResponseEntity.ok(service.buscarEndereco(id));
     }
 
 }

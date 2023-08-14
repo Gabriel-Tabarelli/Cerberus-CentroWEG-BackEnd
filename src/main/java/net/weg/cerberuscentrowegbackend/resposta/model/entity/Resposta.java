@@ -27,10 +27,13 @@ public class Resposta {
     @ManyToOne
     private Pergunta pergunta;
 
-    public Resposta(RespostaDto respostaDto, Long idPergunta) {
+    private String data;
+
+    public Resposta(RespostaDto respostaDto, Long idPergunta, String data) {
         this.resposta = respostaDto.getResposta();
         this.respondedor = new Pessoa(respostaDto.getIdPessoa());
         this.pergunta = new Pergunta(idPergunta);
+        this.data = data;
     }
 
 }
