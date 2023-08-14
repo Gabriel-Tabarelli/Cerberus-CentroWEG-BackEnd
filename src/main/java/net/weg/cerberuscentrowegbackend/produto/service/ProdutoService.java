@@ -22,9 +22,9 @@ import java.util.List;
 @AllArgsConstructor
 public class ProdutoService {
 
-    private ProdutoRepository repository;
-    private PessoaService pessoaService;
-    private PerguntaRepository perguntaRepository;
+    private final ProdutoRepository repository;
+    private final PessoaService pessoaService;
+    private final PerguntaRepository perguntaRepository;
 
     public void save(ProdutoDto produtoDto) {
         Produto produto = new Produto();

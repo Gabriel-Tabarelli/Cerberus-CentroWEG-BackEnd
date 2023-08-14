@@ -8,6 +8,7 @@ import net.weg.cerberuscentrowegbackend.pessoa.model.entity.Pessoa;
 import net.weg.cerberuscentrowegbackend.pessoa.model.entity.PessoaFisica;
 import net.weg.cerberuscentrowegbackend.pessoa.model.entity.PessoaJuridica;
 import net.weg.cerberuscentrowegbackend.pessoa.model.projection.PessoaNotificacoesProjection;
+import net.weg.cerberuscentrowegbackend.pessoa.model.projection.PessoaEnderecoProjection;
 import net.weg.cerberuscentrowegbackend.pessoa.repository.PessoaFisicaRepository;
 import net.weg.cerberuscentrowegbackend.pessoa.repository.PessoaJuridicaRepository;
 import net.weg.cerberuscentrowegbackend.pessoa.repository.PessoaRepository;
@@ -72,6 +73,10 @@ public class PessoaService {
     }
 
     public PessoaNotificacoesProjection buscarNotificacoes(Long id) {
+        return repository.findPessoaByIdReturnPessoaNotificacoes(id);
+    }
+
+    public PessoaEnderecoProjection buscarEndereco(Long id){
         return repository.findPessoaById(id);
     }
 

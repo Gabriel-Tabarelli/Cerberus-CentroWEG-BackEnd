@@ -18,7 +18,7 @@ import java.util.List;
 @RequestMapping("/api/categoria")
 public class CategoriaController {
     
-    private CategoriaService service;
+    private final CategoriaService service;
 
     @PostMapping
     public ResponseEntity<Void> save(@RequestBody @Valid CategoriaDto categoriaDto) {

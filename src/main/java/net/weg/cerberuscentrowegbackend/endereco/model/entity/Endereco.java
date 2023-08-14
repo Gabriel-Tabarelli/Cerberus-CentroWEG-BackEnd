@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.weg.cerberuscentrowegbackend.pessoa.model.entity.Pessoa;
 
 @Entity
 @AllArgsConstructor
@@ -37,5 +38,6 @@ public class Endereco {
 
     @Column     
     private String complemento;
+
 
 }

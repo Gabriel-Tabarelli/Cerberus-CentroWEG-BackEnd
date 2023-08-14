@@ -1,9 +1,12 @@
 package net.weg.cerberuscentrowegbackend.endereco.model.dto;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.weg.cerberuscentrowegbackend.pessoa.model.entity.Pessoa;
+import org.hibernate.annotations.Cascade;
 
 @Data
 @AllArgsConstructor
@@ -29,5 +32,6 @@ public class EnderecoDto {
     private String cep;
 
     private String complemento;
+
 
 }

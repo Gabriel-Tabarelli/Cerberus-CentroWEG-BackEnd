@@ -24,7 +24,7 @@ import java.util.List;
 @CrossOrigin
 public class ProdutoController {
 
-    private ProdutoService service;
+    private final ProdutoService service;
 
     @PostMapping
     public ResponseEntity<Void> create(@RequestBody @Valid ProdutoDto produtoDto) {
