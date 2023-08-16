@@ -2,6 +2,7 @@ package net.weg.cerberuscentrowegbackend.pessoa.controller;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import net.weg.cerberuscentrowegbackend.notificacao.model.projection.NotificacaoProjection;
 import net.weg.cerberuscentrowegbackend.pessoa.model.dto.PessoaFisicaDto;
 import net.weg.cerberuscentrowegbackend.pessoa.model.dto.PessoaJuridicaDto;
 import net.weg.cerberuscentrowegbackend.pessoa.model.entity.Pessoa;
@@ -15,6 +16,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @AllArgsConstructor
@@ -65,9 +68,14 @@ public class PessoaController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/{id}/notificacoes")
-    public ResponseEntity<PessoaNotificacoesProjection> buscarNotificacoes(@PathVariable Long id) {
-        return ResponseEntity.ok(service.buscarNotificacoes(id));
+    @GetMapping("/{id}/notificacoes-nao-visualizadas")
+    public ResponseEntity<List<NotificacaoProjection>> buscarNotificacoesNaoVisualizadas(@PathVariable Long id) {
+        return ResponseEntity.ok(service.buscarNotificacoesNaoVisualizadas(id));
+    }
+
+    @GetMapping("/{id}/notificacoes-visualizadas")
+    public ResponseEntity<List<NotificacaoProjection>> buscarNotificacoesVisualizadas(@PathVariable Long id) {
+        return ResponseEntity.ok(service.buscarNotificacoesVisualizadas(id));
     }
 
     @GetMapping("endereco/{id}")

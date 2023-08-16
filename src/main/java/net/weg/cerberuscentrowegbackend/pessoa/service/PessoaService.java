@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import net.weg.cerberuscentrowegbackend.carrinho.model.entity.Carrinho;
 import net.weg.cerberuscentrowegbackend.carrinho.service.CarrinhoService;
 import net.weg.cerberuscentrowegbackend.exception.ObjetoInexistenteException;
+import net.weg.cerberuscentrowegbackend.notificacao.model.projection.NotificacaoProjection;
 import net.weg.cerberuscentrowegbackend.notificacao.service.NotificacaoService;
 import net.weg.cerberuscentrowegbackend.pessoa.model.entity.Pessoa;
 import net.weg.cerberuscentrowegbackend.pessoa.model.entity.PessoaFisica;
@@ -65,8 +66,12 @@ public class PessoaService {
         return repository.findAllByAdmin(true);
     }
 
-    public PessoaNotificacoesProjection buscarNotificacoes(Long id) {
-        return repository.findPessoaByIdReturnPessoaNotificacoes(id);
+    public List<NotificacaoProjection> buscarNotificacoesVisualizadas(Long id) {
+        return repository.findPessoaByIdReturnPessoaNotificacoes(id, true);
+    }
+
+    public List<NotificacaoProjection> buscarNotificacoesNaoVisualizadas(Long id) {
+        return repository.findPessoaByIdReturnPessoaNotificacoes(id, false);
     }
 
     public PessoaEnderecoProjection buscarEndereco(Long id){
