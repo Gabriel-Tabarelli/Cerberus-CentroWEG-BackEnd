@@ -15,6 +15,8 @@ import net.weg.cerberuscentrowegbackend.pessoa.repository.PessoaFisicaRepository
 import net.weg.cerberuscentrowegbackend.pessoa.repository.PessoaJuridicaRepository;
 import net.weg.cerberuscentrowegbackend.pessoa.repository.PessoaRepository;
 import net.weg.cerberuscentrowegbackend.produto.model.entity.Produto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -66,12 +68,12 @@ public class PessoaService {
         return repository.findAllByAdmin(true);
     }
 
-    public List<NotificacaoProjection> buscarNotificacoesVisualizadas(Long id) {
-        return repository.findPessoaByIdReturnPessoaNotificacoes(id, true);
+    public Page<NotificacaoProjection> buscarNotificacoes(Long id, Pageable page) {
+        return notificacaoService.buscarNotificacoes(id, page);
     }
 
-    public List<NotificacaoProjection> buscarNotificacoesNaoVisualizadas(Long id) {
-        return repository.findPessoaByIdReturnPessoaNotificacoes(id, false);
+    public Boolean haNotificacoesNaoVisualizadas(Long id) {
+        return notificacaoService.haNotificacoesNaoVisualizadas(id);
     }
 
     public PessoaEnderecoProjection buscarEndereco(Long id){
@@ -80,6 +82,7 @@ public class PessoaService {
 
     public void visualizarComentario(Long idNotificacao) {
         notificacaoService.visualizarNotificacao(idNotificacao);
-
     }
+
+
 }

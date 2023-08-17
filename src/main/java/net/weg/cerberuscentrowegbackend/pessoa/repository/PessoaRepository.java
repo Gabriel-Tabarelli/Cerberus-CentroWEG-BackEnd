@@ -27,7 +27,6 @@ public interface PessoaRepository extends JpaRepository<Pessoa, Long> {
             "ORDER BY n.data DESC")
     List<NotificacaoProjection> findPessoaByIdReturnPessoaNotificacoes(
             @Param("id") Long id, @Param("visualizada") boolean visualizada);
-    // PEDIR PARA O TITIO GALI
 
     PessoaEnderecoProjection findPessoaById(Long id);
 

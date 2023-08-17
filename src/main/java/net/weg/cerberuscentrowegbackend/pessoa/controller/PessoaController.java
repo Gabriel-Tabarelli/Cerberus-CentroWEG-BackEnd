@@ -13,6 +13,9 @@ import net.weg.cerberuscentrowegbackend.pessoa.model.projection.PessoaEnderecoPr
 import net.weg.cerberuscentrowegbackend.pessoa.service.PessoaService;
 import net.weg.cerberuscentrowegbackend.produto.model.entity.Produto;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -68,14 +71,17 @@ public class PessoaController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/{id}/notificacoes-nao-visualizadas")
-    public ResponseEntity<List<NotificacaoProjection>> buscarNotificacoesNaoVisualizadas(@PathVariable Long id) {
-        return ResponseEntity.ok(service.buscarNotificacoesNaoVisualizadas(id));
+    @GetMapping("/{id}/notificacoes")
+    public ResponseEntity<Page<NotificacaoProjection>> buscarNotificacoesNaoVisualizadas(
+            @PathVariable Long id,
+            @RequestParam("page") int page
+    ) {
+        return ResponseEntity.ok(service.buscarNotificacoes(id, PageRequest.of(page, 5)));
     }
 
-    @GetMapping("/{id}/notificacoes-visualizadas")
-    public ResponseEntity<List<NotificacaoProjection>> buscarNotificacoesVisualizadas(@PathVariable Long id) {
-        return ResponseEntity.ok(service.buscarNotificacoesVisualizadas(id));
+    @GetMapping("/{id}/notificacoes/existe-nao-visualizada")
+    public ResponseEntity<Boolean> haNotificacoesNaoVisualizadas(@PathVariable Long id) {
+        return ResponseEntity.ok(service.haNotificacoesNaoVisualizadas(id));
     }
 
     @GetMapping("endereco/{id}")
