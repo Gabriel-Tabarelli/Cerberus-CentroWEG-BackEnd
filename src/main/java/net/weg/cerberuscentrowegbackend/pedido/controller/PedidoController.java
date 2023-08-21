@@ -20,7 +20,7 @@ public class PedidoController {
 
     private PedidoService pedidoService;
 
-    @PostMapping("{idCarrinho}")
+    @PostMapping("/{idCarrinho}")
     public ResponseEntity<Void> save(@PathVariable Long idCarrinho) {
         pedidoService.save(idCarrinho);
         return ResponseEntity.ok().build();

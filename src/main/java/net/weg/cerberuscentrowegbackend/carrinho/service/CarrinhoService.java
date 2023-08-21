@@ -1,10 +1,8 @@
 package net.weg.cerberuscentrowegbackend.carrinho.service;
 
 import lombok.AllArgsConstructor;
-import net.weg.cerberuscentrowegbackend.carrinho.model.projectin.CarrinhoIdProdutosProjection;
 import net.weg.cerberuscentrowegbackend.exception.ObjetoInexistenteException;
 import net.weg.cerberuscentrowegbackend.carrinho.model.entity.Carrinho;
-import net.weg.cerberuscentrowegbackend.produto.model.entity.Produto;
 import net.weg.cerberuscentrowegbackend.carrinho.repository.CarrinhoRepository;
 import org.springframework.stereotype.Service;
 

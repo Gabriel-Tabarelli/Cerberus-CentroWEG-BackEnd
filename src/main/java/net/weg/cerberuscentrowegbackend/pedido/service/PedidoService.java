@@ -1,5 +1,6 @@
 package net.weg.cerberuscentrowegbackend.pedido.service;
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import net.weg.cerberuscentrowegbackend.carrinho.model.entity.Carrinho;
 import net.weg.cerberuscentrowegbackend.carrinho.service.CarrinhoService;
@@ -22,6 +23,7 @@ public class PedidoService {
 
     private PedidoRepository repository;
     private CarrinhoService carrinhoService;
+
 
     public void save(Long idCarrinho) {
         Carrinho carrinho = carrinhoService.findOne(idCarrinho);

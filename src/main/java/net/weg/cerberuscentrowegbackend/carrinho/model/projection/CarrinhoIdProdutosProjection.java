@@ -1,4 +1,4 @@
-package net.weg.cerberuscentrowegbackend.carrinho.model.projectin;
+package net.weg.cerberuscentrowegbackend.carrinho.model.projection;
 
 import net.weg.cerberuscentrowegbackend.produto.model.projection.ProdutoMinimizadoProjection;
 
