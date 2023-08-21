@@ -31,8 +31,8 @@ public class NotificacaoService {
         return repository.findNotificacaoByDestinatario_Id(id, page);
     }
 
-    public Boolean haNotificacoesNaoVisualizadas(Long id) {
-        return repository.existsByDestinatario_IdNotificacaoNaoVisualizada(id);
+    public Integer haNotificacoesNaoVisualizadas(Long id) {
+        return repository.countByDestinatario_IdNotificacaoNaoVisualizada(id);
     }
 
 }

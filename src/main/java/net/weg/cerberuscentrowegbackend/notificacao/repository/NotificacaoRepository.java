@@ -25,11 +25,11 @@ public interface NotificacaoRepository extends JpaRepository<Notificacao, Long> 
             @Param("id") Long id,
             Pageable page);
 
-    @Query("SELECT exists (SELECT n " +
+    @Query("SELECT count (n) " +
             "FROM Notificacao n " +
             "JOIN n.destinatario d " +
             "WHERE d.id = :id " +
             "AND n.visualizada = false " +
-            "ORDER BY n.data DESC)")
-    Boolean existsByDestinatario_IdNotificacaoNaoVisualizada(@Param("id") Long id);
+            "ORDER BY n.data DESC")
+    Integer countByDestinatario_IdNotificacaoNaoVisualizada(@Param("id") Long id);
 }

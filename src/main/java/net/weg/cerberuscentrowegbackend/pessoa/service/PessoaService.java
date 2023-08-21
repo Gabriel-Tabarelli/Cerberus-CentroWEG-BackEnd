@@ -72,7 +72,7 @@ public class PessoaService {
         return notificacaoService.buscarNotificacoes(id, page);
     }
 
-    public Boolean haNotificacoesNaoVisualizadas(Long id) {
+    public Integer haNotificacoesNaoVisualizadas(Long id) {
         return notificacaoService.haNotificacoesNaoVisualizadas(id);
     }
 
@@ -83,6 +83,5 @@ public class PessoaService {
     public void visualizarComentario(Long idNotificacao) {
         notificacaoService.visualizarNotificacao(idNotificacao);
     }
-
 
 }

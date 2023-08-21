@@ -80,7 +80,7 @@ public class PessoaController {
     }
 
     @GetMapping("/{id}/notificacoes/existe-nao-visualizada")
-    public ResponseEntity<Boolean> haNotificacoesNaoVisualizadas(@PathVariable Long id) {
+    public ResponseEntity<Integer> haNotificacoesNaoVisualizadas(@PathVariable Long id) {
         return ResponseEntity.ok(service.haNotificacoesNaoVisualizadas(id));
     }
 
