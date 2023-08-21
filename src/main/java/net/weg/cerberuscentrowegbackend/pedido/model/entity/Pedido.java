@@ -11,6 +11,7 @@ import net.weg.cerberuscentrowegbackend.produto.model.entity.Produto;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,7 +27,7 @@ public class Pedido {
     @ManyToOne
     private Pessoa pessoa;
 
-    @OneToMany
+    @ManyToMany
     private List<Produto> produtos;
 
     private String status;
@@ -35,8 +36,8 @@ public class Pedido {
 
     public Pedido(Carrinho carrinho) {
         this.pessoa = carrinho.getPessoa();
-        this.produtos = carrinho.getProdutos();
+        this.produtos = new ArrayList<>(carrinho.getProdutos());
         this.status = "Aguardando pagamento";
-        this.dataPedido = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yy"));
+        this.dataPedido = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yy"));
     }
 }
