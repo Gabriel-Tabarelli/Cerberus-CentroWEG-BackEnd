@@ -8,6 +8,6 @@ public interface PedidoListaProjection {
 
     String getStatus();
 
-    LocalDate getDataPedido();
+    String getDataPedido();
 
 }
