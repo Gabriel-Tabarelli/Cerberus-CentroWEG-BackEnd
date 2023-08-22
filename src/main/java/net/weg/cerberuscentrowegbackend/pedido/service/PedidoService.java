@@ -34,12 +34,9 @@ public class PedidoService {
 
     public Page<PedidoListaProjection> findAll(Long pessoaId, Integer page, String ordem) {
         Sort sort = null;
-        System.out.println(ordem);
         if (ordem.equals("asc")) {
-            System.out.println("ASC");
             sort = Sort.by("id").ascending();
         } else {
-            System.out.println("DESC");
             sort = Sort.by("id").descending();
         }
         return repository.findByPessoa_Id(pessoaId, PageRequest.of(page, 5, sort));
