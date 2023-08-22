@@ -38,17 +38,9 @@ public class ProdutoController {
         return ResponseEntity.ok().build();
     }
 
-
     @GetMapping("/{id}")
     public ResponseEntity<ProdutoSemPerguntasProjection> findOne(@PathVariable Long id) {
         return ResponseEntity.ok(service.findOneById(id));
-    }
-
-    @GetMapping("/get/minimizados")
-    public ResponseEntity<Page<ProdutoMinimizadoProjection>> findAllMinimizado(
-            @RequestParam("page") int page) {
-        Pageable pageable = PageRequest.of(page, 5, Sort.by("nome").descending()); // Implementar retorno com ia
-        return ResponseEntity.ok(service.findAllMinimizado(pageable));
     }
 
     @GetMapping("/{id}/perguntas")
@@ -65,6 +57,35 @@ public class ProdutoController {
             @PathVariable String pesquisa
     ) {
         return ResponseEntity.ok(service.findAllByPesquisa(pesquisa));
+    }
+
+    @GetMapping("/get/minimizados/mais-vendidos")
+    public ResponseEntity<Page<ProdutoMinimizadoProjection>> findAllMinimizadoMaisVendidos(
+            @RequestParam("page") int page) {
+        Pageable pageable = PageRequest.of(page, 5);
+        return ResponseEntity.ok(service.findAllMinimizadoMaisVendidos(pageable));
+    }
+
+    @GetMapping("/get/minimizados/mais-recentes")
+    public ResponseEntity<Page<ProdutoMinimizadoProjection>> findAllMinimizadoRecentes(
+            @RequestParam("page") int page) {
+        Pageable pageable = PageRequest.of(page, 5);
+        return ResponseEntity.ok(service.findAllMinimizadoMaisRecentes(pageable));
+    }
+
+    @GetMapping("/get/minimizados/similares")
+    public ResponseEntity<Page<ProdutoMinimizadoProjection>> findAllMinimizadoSimilar(
+            @RequestParam("page") int page,
+            @RequestParam("nome") String nome) {
+        Pageable pageable = PageRequest.of(page, 5, Sort.by("nome").descending()); // Implementar retorno com ia
+        return ResponseEntity.ok(service.findAllMinimizadoSimilar(nome, pageable));
+    }
+
+    @GetMapping("/get/minimizados/destaques")
+    public ResponseEntity<Page<ProdutoMinimizadoProjection>> findAllMinimizadoDestaques(
+            @RequestParam("page") int page) {
+        Pageable pageable = PageRequest.of(page, 5);
+        return ResponseEntity.ok(service.findAllMinimizadoDestaques(pageable));
     }
 
 }

@@ -41,6 +41,8 @@ public class Produto {
     @JsonIgnore
     private List<Pergunta> perguntas;
 
+    private Integer qtdVendas;
+
     public Produto(Long id) {
         this.id = id;
     }

@@ -28,6 +28,7 @@ public class ProdutoService {
 
     public void save(ProdutoDto produtoDto) {
         Produto produto = new Produto();
+        produto.setQtdVendas(0);
         BeanUtils.copyProperties(produtoDto, produto);
         produtoDto.getPerguntas().forEach(pergunta -> {
             if (pergunta.getListaRespostas() != null) {
@@ -57,10 +58,6 @@ public class ProdutoService {
         return repository.findAllBy();
     }
 
-    public Page<ProdutoMinimizadoProjection> findAllMinimizado(Pageable pageable) {
-        return repository.findAllBy(pageable);
-    }
-
     public List<ProdutoMinimizadoProjection> findAllMinimizado(String categoriaId) {
         return repository.findAllByCategoria_Nome(categoriaId);
     }
@@ -75,5 +72,21 @@ public class ProdutoService {
 
     public List<ProdutoMinimizadoProjection> findAllByPesquisa(String pesquisa) {
         return repository.findAllByNomeContainingIgnoreCaseOrCategoria_NomeContainingIgnoreCase(pesquisa, pesquisa);
+    }
+
+    public Page<ProdutoMinimizadoProjection> findAllMinimizadoMaisVendidos(Pageable pageable) {
+        return repository.findAllMinimizadoMaisVendidos(pageable);
+    }
+
+    public Page<ProdutoMinimizadoProjection> findAllMinimizadoMaisRecentes(Pageable pageable) {
+        return repository.findAllMinimizadoMaisRecentes(pageable);
+    }
+
+    public Page<ProdutoMinimizadoProjection> findAllMinimizadoSimilar(String nome, Pageable pageable) {
+        return repository.findAllMinimizadoSimilar(nome, pageable);
+    }
+
+    public Page<ProdutoMinimizadoProjection> findAllMinimizadoDestaques(Pageable pageable) {
+        return repository.findAllMinimizadoDestaques(pageable);
     }
 }
