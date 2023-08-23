@@ -12,6 +12,9 @@ import net.weg.cerberuscentrowegbackend.pedido.model.projection.PedidoProjection
 import net.weg.cerberuscentrowegbackend.pedido.repository.PedidoRepository;
 import net.weg.cerberuscentrowegbackend.pessoa.model.entity.Pessoa;
 import net.weg.cerberuscentrowegbackend.pessoa.service.PessoaService;
+import net.weg.cerberuscentrowegbackend.produto.model.entity.Produto;
+import net.weg.cerberuscentrowegbackend.produto.repository.ProdutoRepository;
+import net.weg.cerberuscentrowegbackend.produto.service.ProdutoService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -23,17 +26,21 @@ public class PedidoService {
 
     private PedidoRepository repository;
     private CarrinhoService carrinhoService;
-
+    private ProdutoRepository produtoRepository;
 
     public void save(Long idCarrinho) {
         Carrinho carrinho = carrinhoService.findOne(idCarrinho);
         repository.save(new Pedido(carrinho));
+        carrinho.getProdutos().forEach(produto -> {
+            produto.setQtdVendas(produto.getQtdVendas() + 1);
+            produtoRepository.save(produto);
+        });
         carrinho.getProdutos().removeAll(carrinho.getProdutos());
         carrinhoService.save(carrinho);
     }
 
     public Page<PedidoListaProjection> findAll(Long pessoaId, Integer page, String ordem) {
-        Sort sort = null;
+        Sort sort;
         if (ordem.equals("asc")) {
             sort = Sort.by("id").ascending();
         } else {
