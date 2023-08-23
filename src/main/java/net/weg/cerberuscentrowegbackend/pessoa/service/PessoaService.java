@@ -59,11 +59,6 @@ public class PessoaService {
         repository.save(pessoa);
     }
 
-    public void removerFavorito(Pessoa pessoa, Produto produto) {
-        pessoa.getFavoritos().remove(produto);
-        update(pessoa);
-    }
-
     public List<Pessoa> pegarAdmins() {
         return repository.findAllByAdmin(true);
     }

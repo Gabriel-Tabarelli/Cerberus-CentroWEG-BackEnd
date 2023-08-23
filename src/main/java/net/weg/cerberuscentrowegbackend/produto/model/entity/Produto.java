@@ -4,16 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import net.weg.cerberuscentrowegbackend.categoria.model.entity.Categoria;
 import net.weg.cerberuscentrowegbackend.pergunta.model.entity.Pergunta;
-import org.hibernate.annotations.Formula;
 
 import java.util.List;
 
 @Entity
 @AllArgsConstructor
-@NoArgsConstructor
 @Data
 public class Produto {
 
@@ -41,7 +38,16 @@ public class Produto {
     @JsonIgnore
     private List<Pergunta> perguntas;
 
+    @Column(nullable = false)
     private Integer qtdVendas;
+
+    @Column(nullable = false)
+    private Long qtdVisualizacoes;
+
+    public Produto() {
+        this.qtdVisualizacoes = 0L;
+        this.qtdVendas = 0;
+    }
 
     public Produto(Long id) {
         this.id = id;

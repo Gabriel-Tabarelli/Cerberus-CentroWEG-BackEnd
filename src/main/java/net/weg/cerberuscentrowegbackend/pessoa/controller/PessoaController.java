@@ -59,23 +59,16 @@ public class PessoaController {
     }
 
     @GetMapping
-    public ResponseEntity<Pessoa> findOne(@RequestParam("email") String email,
-                                          @RequestParam("senha") String senha) {
+    public ResponseEntity<Pessoa> findOne(
+            @RequestParam("email") String email,
+            @RequestParam("senha") String senha) {
         return ResponseEntity.ok(service.findOneByEmailAndSenha(email, senha));
-    }
-
-    @PutMapping("/{id}/remover-favorito")
-    public ResponseEntity<Void> removerFavorito(@PathVariable Long id, @RequestBody Produto produto) {
-        Pessoa pessoa = service.findOne(id);
-        service.removerFavorito(pessoa, produto);
-        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{id}/notificacoes")
     public ResponseEntity<Page<NotificacaoProjection>> buscarNotificacoesNaoVisualizadas(
             @PathVariable Long id,
-            @RequestParam("page") int page
-    ) {
+            @RequestParam("page") int page) {
         return ResponseEntity.ok(service.buscarNotificacoes(id, PageRequest.of(page, 5)));
     }
 

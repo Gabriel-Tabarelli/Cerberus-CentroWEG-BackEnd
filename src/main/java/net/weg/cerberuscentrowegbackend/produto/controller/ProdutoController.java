@@ -4,9 +4,8 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import net.weg.cerberuscentrowegbackend.pergunta.model.projection.PerguntaProjection;
 import net.weg.cerberuscentrowegbackend.produto.model.dto.ProdutoDto;
+import net.weg.cerberuscentrowegbackend.produto.model.dto.ProdutoSemPerguntasDto;
 import net.weg.cerberuscentrowegbackend.produto.model.projection.ProdutoMinimizadoProjection;
-import net.weg.cerberuscentrowegbackend.produto.model.projection.ProdutoPerguntasProjection;
-import net.weg.cerberuscentrowegbackend.produto.model.projection.ProdutoSemPerguntasProjection;
 import net.weg.cerberuscentrowegbackend.produto.service.ProdutoService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -32,14 +31,9 @@ public class ProdutoController {
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        service.delete(id);
-        return ResponseEntity.ok().build();
-    }
-
     @GetMapping("/{id}")
-    public ResponseEntity<ProdutoSemPerguntasProjection> findOne(@PathVariable Long id) {
+    public ResponseEntity<ProdutoSemPerguntasDto> findOne(
+            @PathVariable Long id) {
         return ResponseEntity.ok(service.findOneById(id));
     }
 
@@ -62,30 +56,26 @@ public class ProdutoController {
     @GetMapping("/get/minimizados/mais-vendidos")
     public ResponseEntity<Page<ProdutoMinimizadoProjection>> findAllMinimizadoMaisVendidos(
             @RequestParam("page") int page) {
-        Pageable pageable = PageRequest.of(page, 5);
-        return ResponseEntity.ok(service.findAllMinimizadoMaisVendidos(pageable));
+        return ResponseEntity.ok(service.findAllMinimizadoMaisVendidos(PageRequest.of(page, 5)));
     }
 
     @GetMapping("/get/minimizados/mais-recentes")
     public ResponseEntity<Page<ProdutoMinimizadoProjection>> findAllMinimizadoRecentes(
             @RequestParam("page") int page) {
-        Pageable pageable = PageRequest.of(page, 5);
-        return ResponseEntity.ok(service.findAllMinimizadoMaisRecentes(pageable));
+        return ResponseEntity.ok(service.findAllMinimizadoMaisRecentes(PageRequest.of(page, 5)));
     }
 
     @GetMapping("/get/minimizados/similares")
     public ResponseEntity<Page<ProdutoMinimizadoProjection>> findAllMinimizadoSimilar(
             @RequestParam("page") int page,
             @RequestParam("nome") String nome) {
-        Pageable pageable = PageRequest.of(page, 5, Sort.by("nome").descending()); // Implementar retorno com ia
-        return ResponseEntity.ok(service.findAllMinimizadoSimilar(nome, pageable));
+        return ResponseEntity.ok(service.findAllMinimizadoSimilar(nome, PageRequest.of(page, 5)));
     }
 
     @GetMapping("/get/minimizados/destaques")
     public ResponseEntity<Page<ProdutoMinimizadoProjection>> findAllMinimizadoDestaques(
             @RequestParam("page") int page) {
-        Pageable pageable = PageRequest.of(page, 5);
-        return ResponseEntity.ok(service.findAllMinimizadoDestaques(pageable));
+        return ResponseEntity.ok(service.findAllMinimizadoDestaques(PageRequest.of(page, 5)));
     }
 
 }

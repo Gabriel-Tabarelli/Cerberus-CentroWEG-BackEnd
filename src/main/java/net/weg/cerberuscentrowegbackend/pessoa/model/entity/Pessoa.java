@@ -40,9 +40,6 @@ public class Pessoa {
     private String telefone;
 
     @ManyToMany
-    private List<Produto> favoritos;
-
-    @ManyToMany
     @JsonIgnore
     private List<Notificacao> notificacoes;
 
