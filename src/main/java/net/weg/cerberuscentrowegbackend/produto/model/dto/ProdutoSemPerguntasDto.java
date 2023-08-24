@@ -20,13 +20,15 @@ public class ProdutoSemPerguntasDto {
 
     private Categoria categoria;
 
+    private List<EspecificacaoProduto> especificacoes;
+
     public ProdutoSemPerguntasDto(Produto produto) {
         this.id = produto.getId();
         this.nome = produto.getNome();
         this.urlImagem = produto.getUrlImagem();
         this.descricao = produto.getDescricao();
         this.categoria = produto.getCategoria();
-        List<EspecificacaoProduto> especificacoes = produto.getEspecificacoes();
+        this.especificacoes = produto.getEspecificacoes();
     }
     
 }
