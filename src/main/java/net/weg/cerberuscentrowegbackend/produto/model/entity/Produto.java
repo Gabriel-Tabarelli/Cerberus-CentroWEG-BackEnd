@@ -8,6 +8,7 @@ import net.weg.cerberuscentrowegbackend.categoria.model.entity.Categoria;
 import net.weg.cerberuscentrowegbackend.pergunta.model.entity.Pergunta;
 
 import java.util.List;
+import java.util.Random;
 
 @Entity
 @AllArgsConstructor
@@ -42,11 +43,13 @@ public class Produto {
     private Integer qtdVendas;
 
     @Column(nullable = false)
-    private Long qtdVisualizacoes;
+    private Integer qtdVisualizacoes;
 
     public Produto() {
-        this.qtdVisualizacoes = 0L;
-        this.qtdVendas = 0;
+        Random random = new Random();
+        int num = random.nextInt(100) + 1;
+        this.qtdVendas = num;
+        this.qtdVisualizacoes = num + random.nextInt(50) + 5;
     }
 
     public Produto(Long id) {
